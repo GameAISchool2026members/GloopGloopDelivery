@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d4105dvenpe7"
-path="res://.godot/imported/urizen_environment.png-fb640e85a5d85c4dd901ce475f54375e.ctex"
+uid="uid://cjacu0wu1krr1"
+path="res://.godot/imported/crate.png-bf175b4c87cf883a1eab3c96a170a10d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://terrain/resources/urizen_environment.png"
-dest_files=["res://.godot/imported/urizen_environment.png-fb640e85a5d85c4dd901ce475f54375e.ctex"]
+source_file="res://objects/collection_point/crate.png"
+dest_files=["res://.godot/imported/crate.png-bf175b4c87cf883a1eab3c96a170a10d.ctex"]
 
 [params]
 

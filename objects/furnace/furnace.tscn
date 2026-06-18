@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://ccyvh84kwayqn"]
 
-[ext_resource type="Texture2D" uid="uid://d2858t4ywch0s" path="res://navigation_demo/objects/furnace/furnace_sprite.tres" id="1_4uq3h"]
+[ext_resource type="Texture2D" uid="uid://cw8jtvsvgksla" path="res://objects/furnace/furnace_off.png" id="1_xhc34"]
 
 [node name="Furnace" type="Node2D" unique_id=521397584]
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1527274717]
-texture = ExtResource("1_4uq3h")
+texture = ExtResource("1_xhc34")
