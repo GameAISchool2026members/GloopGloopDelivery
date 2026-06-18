@@ -14,8 +14,10 @@ extends TileMapLayer
 @export var background_tiles: Array[Vector2i] = []
 @export var obstacle_tiles: Array[Vector2i] = []
 @export var wall_tiles: Array[Vector2i] = []
+
 @export var resource_scenes: Array[PackedScene] = []
 @export var processor_scenes: Array[PackedScene] = []
+@export var collection_scene: PackedScene = null
 
 var astar: AStarGrid2D
 
@@ -27,13 +29,13 @@ var _pois: Array[Vector2i] = []
 func _random_pos() -> Vector2i:
 	var rand = Vector2i.ZERO
 	while rand == Vector2i.ZERO:
-		rand = Vector2i(randi_range(1, width -1), randi_range(1, height -1))
+		rand = Vector2i(randi_range(1, width -2), randi_range(1, height -2))
 		if astar.is_point_solid(rand): 
 			rand = Vector2i.ZERO
 			break # reject
 	return rand
-	
 
+# 
 func _add_pois(pois: Array[PackedScene]):
 	for res in pois:
 		var obj = res.instantiate() as Node2D
@@ -46,8 +48,22 @@ func _add_pois(pois: Array[PackedScene]):
 					break # reject
 		obj.global_position = map_to_local(pos)
 		add_child(obj)
+		_pois.append(pos)
 
 func _ready():
+	_generate_all()
+	var valid: bool = _validate_all()
+	while not valid:
+		print("generate new level")
+		_generate_all()
+		valid = _validate_all()
+
+func _generate_all():
+	# clean potential old level
+	_pois = []
+	for c in get_children():
+		c.queue_free()
+	
 	_init_astar()
 	_init_base_map()
 	_add_walls()
@@ -56,6 +72,16 @@ func _ready():
 	_add_collection_point()
 	_choose_spawn_points()
 	_add_border()
+	
+func _validate_all():
+	# all pois must be able to reach eachother
+	for poi in _pois:
+		for other in _pois:
+			if other != poi: # ignore self
+				var path = astar.get_id_path(poi, other)
+				if len(path) == 0:
+					return false # invalid
+	return true
 	
 func _init_astar():
 	astar = AStarGrid2D.new()
@@ -71,13 +97,11 @@ func _init_base_map():
 		for y in height:
 			var pos = Vector2i(x,y)
 			var tile: Vector2i = Vector2i.ZERO
-			
 			if randf() < 0.05:
 				tile = obstacle_tiles.pick_random()
 				astar.set_point_solid(pos)
 			else:
 				tile = background_tiles.pick_random()
-					
 			set_cell(pos, 0, tile)
 			
 # generate a couple of straight lines as more interesting obstacles
@@ -107,10 +131,17 @@ func _add_processors():
 	_add_pois(processor_scenes)
 	
 func _add_collection_point():
-	pass
+	_add_pois([collection_scene])
 	
 func _choose_spawn_points():
 	pass
 		
 func _add_border():
-	pass
+	var tile = obstacle_tiles.pick_random()
+	for x in width:
+		set_cell(Vector2i(x,0), 0, tile)
+		set_cell(Vector2i(x,height-1), 0, tile)
+	for y in height:
+		set_cell(Vector2i(0,y), 0, tile)
+		set_cell(Vector2i(width-1,y), 0, tile)
+			
