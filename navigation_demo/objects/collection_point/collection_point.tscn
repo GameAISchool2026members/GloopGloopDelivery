@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://dtdnjx0jaxob2"]
+
+[ext_resource type="Texture2D" uid="uid://cxf2v154yh3hj" path="res://navigation_demo/objects/collection_point/collection_sprite.tres" id="1_v2wvx"]
+
+[node name="CollectionPoint" type="Node2D" unique_id=521397584]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1527274717]
+texture = ExtResource("1_v2wvx")

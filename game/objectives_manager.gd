@@ -1,4 +1,4 @@
-extends Node2D
+class_name ObjectivesManager extends Node2D
 
 var objectives : Array[Node2D]
 
@@ -8,11 +8,11 @@ func find_all_objectes() -> void:
 func get_all_resources() -> Array[Node2D]:
 	return []
 
-func number_of_objectives() -> int:
+func get_number_of_objectives() -> int:
 	return objectives.size()
 
 func objective_data_size() -> int:
-	return number_of_objectives() * 3
+	return get_number_of_objectives() * 3
 
 # list of inputs for the policy, for each objective:
 # distance to player

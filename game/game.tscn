@@ -6,6 +6,11 @@
 [ext_resource type="Script" uid="uid://bydlo2gs47d03" path="res://game/objectives_manager.gd" id="2_dxrkv"]
 [ext_resource type="PackedScene" uid="uid://ckudr8chj1kgo" path="res://players/human/human_player.tscn" id="6_dakft"]
 [ext_resource type="PackedScene" uid="uid://b8b8erpuqqxvy" path="res://players/robot/robot_player.tscn" id="6_u5opy"]
+[ext_resource type="TileSet" uid="uid://dli2rfow54owf" path="res://navigation_demo/resources/tile_set.tres" id="8_qf6n1"]
+[ext_resource type="Script" uid="uid://mj8q4ma705q" path="res://navigation_demo/random_terrain.gd" id="9_vsp63"]
+[ext_resource type="PackedScene" uid="uid://bjno6tvo3sc2s" path="res://navigation_demo/objects/iron_ore/iron_ore.tscn" id="10_b686c"]
+[ext_resource type="PackedScene" uid="uid://bdcpdpi5ui2q1" path="res://navigation_demo/objects/gold_ore/gold_ore.tscn" id="11_hb504"]
+[ext_resource type="PackedScene" uid="uid://ccyvh84kwayqn" path="res://navigation_demo/objects/furnace/furnace.tscn" id="12_ee6o4"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_vasa2"]
 font = ExtResource("1_l1rk1")
@@ -16,13 +21,19 @@ shadow_offset = Vector2(5, 5)
 
 [node name="Game" type="Node2D" unique_id=1353891694]
 
-[node name="GameManager" type="Node2D" parent="." unique_id=385739205]
+[node name="GameManager" type="Node2D" parent="." unique_id=385739205 node_paths=PackedStringArray("human_player", "robot_player", "tile_map_layer", "objectives_manager")]
 script = ExtResource("1_vasa2")
+human_player = NodePath("../Players/HumanPlayer")
+robot_player = NodePath("../Players/RobotPlayer")
+tile_map_layer = NodePath("../Environment/RandomTerrain")
+objectives_manager = NodePath("../ObjectivesManager")
 
 [node name="ObjectivesManager" type="Node2D" parent="." unique_id=29152518]
 script = ExtResource("2_dxrkv")
 
-[node name="GUI" type="Control" parent="." unique_id=521750349]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1925882695]
+
+[node name="GUI" type="Control" parent="Camera2D" unique_id=521750349]
 custom_minimum_size = Vector2(1152, 648)
 layout_direction = 1
 layout_mode = 3
@@ -37,14 +48,14 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_4fuuu")
 
-[node name="Score" type="Label" parent="GUI" unique_id=1806668851]
+[node name="Score" type="Label" parent="Camera2D/GUI" unique_id=1806668851]
 layout_mode = 1
 offset_right = 792.0
 offset_bottom = 59.0
 text = "Score: 0"
 label_settings = SubResource("LabelSettings_vasa2")
 
-[node name="Timer" type="Label" parent="GUI" unique_id=228366306]
+[node name="Timer" type="Label" parent="Camera2D/GUI" unique_id=228366306]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -57,7 +68,22 @@ text = "100"
 label_settings = SubResource("LabelSettings_vasa2")
 horizontal_alignment = 1
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=1925882695]
+[node name="Environment" type="Node2D" parent="." unique_id=1906198449]
+
+[node name="RandomTerrain" type="TileMapLayer" parent="Environment" unique_id=1162369464]
+unique_name_in_owner = true
+tile_set = ExtResource("8_qf6n1")
+script = ExtResource("9_vsp63")
+width = 40
+height = 25
+min_line_size = 10
+max_line_size = 15
+line_count = 10
+min_poi_dist = 10
+background_tiles = Array[Vector2i]([Vector2i(0, 2), Vector2i(1, 2), Vector2i(5, 2), Vector2i(6, 2), Vector2i(7, 2)])
+obstacle_tiles = Array[Vector2i]([Vector2i(0, 8), Vector2i(1, 8), Vector2i(2, 8), Vector2i(3, 8)])
+resource_scenes = Array[PackedScene]([ExtResource("10_b686c"), ExtResource("11_hb504")])
+processor_scenes = Array[PackedScene]([ExtResource("12_ee6o4")])
 
 [node name="Players" type="Node2D" parent="." unique_id=1032971318]
 
