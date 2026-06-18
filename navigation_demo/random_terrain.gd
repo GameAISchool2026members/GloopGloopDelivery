@@ -1,4 +1,4 @@
-extends TileMapLayer
+class_name Terrain extends TileMapLayer
 
 # On ready, generates a WxH map
 # places 2 resources, 1 processor and 1 collection point and 2 spawn points
@@ -20,6 +20,7 @@ extends TileMapLayer
 @export var collection_scene: PackedScene = null
 
 var astar: AStarGrid2D
+var spawns: Array[Vector2i] = []
 
 # keeps track of the positions of resources and processors
 # during generation, such that they can be spaced apart sufficiently
@@ -50,11 +51,10 @@ func _add_pois(pois: Array[PackedScene]):
 		add_child(obj)
 		_pois.append(pos)
 
-func _ready():
+func generate():
 	_generate_all()
 	var valid: bool = _validate_all()
 	while not valid:
-		print("generate new level")
 		_generate_all()
 		valid = _validate_all()
 
@@ -134,14 +134,21 @@ func _add_collection_point():
 	_add_pois([collection_scene])
 	
 func _choose_spawn_points():
-	pass
+	for i in 2:
+		var pos = _random_pos()
+		_pois.append(pos)
+		spawns.append(pos)
 		
 func _add_border():
 	var tile = obstacle_tiles.pick_random()
 	for x in width:
 		set_cell(Vector2i(x,0), 0, tile)
+		astar.set_point_solid(Vector2i(x,0))
 		set_cell(Vector2i(x,height-1), 0, tile)
+		astar.set_point_solid(Vector2i(x,height-1))
 	for y in height:
 		set_cell(Vector2i(0,y), 0, tile)
+		astar.set_point_solid(Vector2i(0,y))
 		set_cell(Vector2i(width-1,y), 0, tile)
+		astar.set_point_solid(Vector2i(width-1,y))
 			
