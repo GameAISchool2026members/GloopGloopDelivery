@@ -1,12 +1,12 @@
 class_name GameManager extends Node2D
 
-@onready var gui : GameGUI = $"../Camera2D/GUI"
+@onready var gui : GameGUI = $"../CanvasLayer/GUI"
 
 @export var game_length :float = 100
 
 @export var human_player : Player
 @export var robot_player : Player
-@export var tile_map_layer : TileMapLayer
+@export var terrain : Terrain
 @export var objectives_manager : ObjectivesManager
 
 var score : float = 0
@@ -23,6 +23,10 @@ func _ready() -> void:
 	
 func _start_game() -> void:
 	timer = game_length
+	
+	terrain.generate()
+	human_player.position = terrain.to_global(terrain.map_to_local(terrain.spawns[0]))
+	robot_player.position = terrain.to_global(terrain.map_to_local(terrain.spawns[1]))
 	state = State.GAME
 	
 	# todo play start animation?
