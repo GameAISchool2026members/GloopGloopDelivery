@@ -28,7 +28,7 @@ func _input(event):
 		print(player_local)
 		var target_local = tilemap.local_to_map(get_global_mouse_position())
 		print(target_local)
-		path = tilemap.astar_grid.get_point_path(player_local, target_local)
+		path = tilemap.astar.get_point_path(player_local, target_local)
 		path_index = 0
 		# show path for debug
 		line.points = path

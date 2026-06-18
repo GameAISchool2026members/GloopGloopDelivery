@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" format=3 uid="uid://dcr1bnh06eca1"]
+
+[ext_resource type="Texture2D" uid="uid://d4105dvenpe7" path="res://navigation_demo/resources/urizen_environment.png" id="1_13dbx"]
+
+[resource]
+atlas = ExtResource("1_13dbx")
+region = Rect2(66, 300, 12, 12)

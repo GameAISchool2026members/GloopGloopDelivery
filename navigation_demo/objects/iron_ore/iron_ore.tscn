@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://bjno6tvo3sc2s"]
+
+[ext_resource type="Texture2D" uid="uid://dcr1bnh06eca1" path="res://navigation_demo/objects/iron_ore/iron_ore_sprite.tres" id="1_7irfx"]
+
+[node name="IronOre" type="Node2D" unique_id=521397584]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1527274717]
+texture = ExtResource("1_7irfx")

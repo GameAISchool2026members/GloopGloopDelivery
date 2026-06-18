@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://bdcpdpi5ui2q1"]
+
+[ext_resource type="Texture2D" uid="uid://bwnyfmjautqub" path="res://navigation_demo/objects/gold_ore/gold_ore_sprite.tres" id="1_dvcvf"]
+
+[node name="GoldOre" type="Node2D" unique_id=521397584]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1527274717]
+texture = ExtResource("1_dvcvf")
