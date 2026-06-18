@@ -10,6 +10,7 @@ class_name Terrain extends TileMapLayer
 @export var min_line_size = 5
 @export var max_line_size = 10
 @export var line_count = 5
+@export var obstacle_percentage = 0.1
 @export var min_poi_dist = 5
 @export var background_tiles: Array[Vector2i] = []
 @export var obstacle_tiles: Array[Vector2i] = []
@@ -97,7 +98,7 @@ func _init_base_map():
 		for y in height:
 			var pos = Vector2i(x,y)
 			var tile: Vector2i = Vector2i.ZERO
-			if randf() < 0.05:
+			if randf() < obstacle_percentage:
 				tile = obstacle_tiles.pick_random()
 				astar.set_point_solid(pos)
 			else:
@@ -112,7 +113,7 @@ func _add_walls():
 		if randf() < 0.5:
 			line_w = randi_range(min_line_size, max_line_size)
 			line_h = 1
-		var tile = obstacle_tiles.pick_random()
+		var tile = wall_tiles.pick_random()
 		var start_pos = _random_pos()
 		for w in line_w:
 			for h in line_h:
@@ -140,7 +141,7 @@ func _choose_spawn_points():
 		spawns.append(pos)
 		
 func _add_border():
-	var tile = obstacle_tiles.pick_random()
+	var tile = wall_tiles.pick_random()
 	for x in width:
 		set_cell(Vector2i(x,0), 0, tile)
 		astar.set_point_solid(Vector2i(x,0))

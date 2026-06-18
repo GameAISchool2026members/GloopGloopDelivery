@@ -1,9 +1,8 @@
 extends CharacterBody2D
 
 @export var speed: float = 100.0
-@onready var navigation_agent: NavigationAgent2D = get_node("NavigationAgent2D")
 @onready var line: Line2D = %Line2D
-@onready var tilemap: TileMapLayer = %RandomTerrain
+@onready var tilemap: TileMapLayer = %Terrain
 var path_index: int = 0
 var path: PackedVector2Array = []
 
