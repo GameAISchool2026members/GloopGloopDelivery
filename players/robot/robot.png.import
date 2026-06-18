@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dijutb00hab5e"
-path="res://.godot/imported/spr_terrains.png-f09d91a27aec7a012c84969a93024026.ctex"
+uid="uid://bpvjos7c7iwtw"
+path="res://.godot/imported/robot.png-b4bc0b7c2ec5fa186c6725e390f9a39f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://environment_demo/spr_terrains.png"
-dest_files=["res://.godot/imported/spr_terrains.png-f09d91a27aec7a012c84969a93024026.ctex"]
+source_file="res://players/robot/robot.png"
+dest_files=["res://.godot/imported/robot.png-b4bc0b7c2ec5fa186c6725e390f9a39f.ctex"]
 
 [params]
 

@@ -24,9 +24,8 @@ func _start_game() -> void:
 	
 	terrain.generate()
 	objectives_manager.find_all_objectes()
-	human_player.position = terrain.to_global(terrain.map_to_local(terrain.spawns[0]))
-	robot_player.position = terrain.to_global(terrain.map_to_local(terrain.spawns[1]))
-	state = State.GAME	
+	human_player.position = terrain.to_global(terrain.map_to_local(Vector2(terrain.spawns[0])+Vector2(0.5,0.5)))
+	robot_player.position = terrain.to_global(terrain.map_to_local(Vector2(terrain.spawns[1])+Vector2(0.5,0.5)))
 	
 	# todo play start animation?
 

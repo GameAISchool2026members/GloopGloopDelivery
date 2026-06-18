@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://c3tjvqx32efdg"]
+
+[ext_resource type="Script" uid="uid://d3sqrlet8aabw" path="res://terrain/navigation_demo.gd" id="1_fl77q"]
+[ext_resource type="Script" uid="uid://c68285d8186wp" path="res://terrain/navigation_player.gd" id="3_tx5c3"]
+[ext_resource type="PackedScene" uid="uid://dxv44t1na7jg0" path="res://terrain/terrain.tscn" id="4_1aryj"]
+[ext_resource type="Texture2D" uid="uid://kw5302i5rm6m" path="res://players/human/human.png" id="4_fnq0o"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_feb5d"]
+size = Vector2(8, 8)
+
+[node name="NavigationDemo" type="Node2D" unique_id=429720440]
+script = ExtResource("1_fl77q")
+
+[node name="Terrain" parent="." unique_id=879474183 instance=ExtResource("4_1aryj")]
+unique_name_in_owner = true
+width = 30
+height = 20
+min_line_size = 6
+max_line_size = 12
+line_count = 8
+
+[node name="Player" type="CharacterBody2D" parent="." unique_id=309995051]
+unique_name_in_owner = true
+position = Vector2(299, 152)
+script = ExtResource("3_tx5c3")
+
+[node name="Sprite2D" type="Sprite2D" parent="Player" unique_id=842694556]
+texture = ExtResource("4_fnq0o")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player" unique_id=459096027]
+shape = SubResource("RectangleShape2D_feb5d")
+
+[node name="Line2D" type="Line2D" parent="." unique_id=1014341156]
+unique_name_in_owner = true
+width = 1.0
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=973418584]
+position = Vector2(268, 152)
+zoom = Vector2(2, 2)
