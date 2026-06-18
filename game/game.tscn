@@ -88,7 +88,8 @@ collection_scene = ExtResource("10_qf6n1")
 
 [node name="Players" type="Node2D" parent="." unique_id=1032971318]
 
-[node name="HumanPlayer" parent="Players" unique_id=9644110 instance=ExtResource("6_dakft")]
+[node name="HumanPlayer" parent="Players" unique_id=9644110 node_paths=PackedStringArray("game_manager") instance=ExtResource("6_dakft")]
+game_manager = NodePath("../../GameManager")
 
 [node name="RobotPlayer" parent="Players" unique_id=274457977 node_paths=PackedStringArray("game_manager") instance=ExtResource("6_u5opy")]
 game_manager = NodePath("../../GameManager")

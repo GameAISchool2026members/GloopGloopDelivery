@@ -15,8 +15,6 @@ var timer : float = 0
 enum State { START, GAME, END }
 var state : State = State.START
 
-
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	_start_game()
@@ -25,9 +23,10 @@ func _start_game() -> void:
 	timer = game_length
 	
 	terrain.generate()
+	objectives_manager.find_all_objectes()
 	human_player.position = terrain.to_global(terrain.map_to_local(terrain.spawns[0]))
 	robot_player.position = terrain.to_global(terrain.map_to_local(terrain.spawns[1]))
-	state = State.GAME
+	state = State.GAME	
 	
 	# todo play start animation?
 
