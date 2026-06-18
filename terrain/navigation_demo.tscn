@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://c3tjvqx32efdg"]
 
-[ext_resource type="Script" uid="uid://d3sqrlet8aabw" path="res://navigation_demo/navigation_demo.gd" id="1_fl77q"]
-[ext_resource type="Script" uid="uid://c68285d8186wp" path="res://navigation_demo/navigation_player.gd" id="3_tx5c3"]
-[ext_resource type="PackedScene" uid="uid://dxv44t1na7jg0" path="res://navigation_demo/terrain.tscn" id="4_1aryj"]
-[ext_resource type="Texture2D" uid="uid://bd7l6i0voscv4" path="res://navigation_demo/resources/player_sprite.tres" id="4_umvx1"]
+[ext_resource type="Script" uid="uid://d3sqrlet8aabw" path="res://terrain/navigation_demo.gd" id="1_fl77q"]
+[ext_resource type="Script" uid="uid://c68285d8186wp" path="res://terrain/navigation_player.gd" id="3_tx5c3"]
+[ext_resource type="PackedScene" uid="uid://dxv44t1na7jg0" path="res://terrain/terrain.tscn" id="4_1aryj"]
+[ext_resource type="Texture2D" uid="uid://kw5302i5rm6m" path="res://players/human/human.png" id="4_fnq0o"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_feb5d"]
 size = Vector2(8, 8)
@@ -25,7 +25,7 @@ position = Vector2(299, 152)
 script = ExtResource("3_tx5c3")
 
 [node name="Sprite2D" type="Sprite2D" parent="Player" unique_id=842694556]
-texture = ExtResource("4_umvx1")
+texture = ExtResource("4_fnq0o")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player" unique_id=459096027]
 shape = SubResource("RectangleShape2D_feb5d")

@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://d4105dvenpe7"
-path="res://.godot/imported/urizen_environment.png-a66e7dc5db9aa32c341e66e35da08b65.ctex"
+path="res://.godot/imported/urizen_environment.png-fb640e85a5d85c4dd901ce475f54375e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://navigation_demo/resources/urizen_environment.png"
-dest_files=["res://.godot/imported/urizen_environment.png-a66e7dc5db9aa32c341e66e35da08b65.ctex"]
+source_file="res://terrain/resources/urizen_environment.png"
+dest_files=["res://.godot/imported/urizen_environment.png-fb640e85a5d85c4dd901ce475f54375e.ctex"]
 
 [params]
 
