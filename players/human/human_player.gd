@@ -1,16 +1,17 @@
 class_name HumanPlayer extends Player
 
 signal interact
+signal pickup_objective(Entity: Node2D)
 
 @export var game_manager : GameManager
+@onready var interaction_area: Area2D = $InteractionArea
 var objectives_manager : ObjectivesManager
 var touching: Node2D
 var carrying :Node2D
-signal pickup_objective(Entity: Node2D)
 
 func _ready() -> void:
-	$InteractionArea.area_entered.connect(_on_interaction_area_entered)
-	$InteractionArea.area_exited.connect(_on_interaction_area_exited)
+	interaction_area.area_entered.connect(_on_interaction_area_entered)
+	interaction_area.area_exited.connect(_on_interaction_area_exited)
 	objectives_manager = game_manager.objectives_manager
 	speed = 200
 	
