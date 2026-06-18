@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://dhvjayoadoy3u"]
+
+[ext_resource type="Script" uid="uid://c2j4em0ewchns" path="res://mlp/test/mlp_test_sin.gd" id="1_6e71c"]
+
+[node name="MLPTest" type="Node2D" unique_id=892183278]
+script = ExtResource("1_6e71c")
+
+[node name="TrueLine" type="Line2D" parent="." unique_id=216305964]
+
+[node name="PredLine" type="Line2D" parent="." unique_id=1435501558]
+default_color = Color(0.08627451, 1, 1, 1)

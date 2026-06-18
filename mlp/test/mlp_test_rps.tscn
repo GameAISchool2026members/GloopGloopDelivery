@@ -1,0 +1,55 @@
+[gd_scene format=3 uid="uid://di0njyp5kxnyw"]
+
+[ext_resource type="Script" uid="uid://cq083mbaeapnt" path="res://mlp/test/mlp_test_rps.gd" id="1_csma6"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_csma6"]
+font_size = 100
+
+[node name="Mlprps" type="Node2D" unique_id=1296206268]
+script = ExtResource("1_csma6")
+
+[node name="Control" type="Control" parent="." unique_id=426008882]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control" unique_id=815804439]
+layout_mode = 0
+offset_right = 608.0
+offset_bottom = 200.0
+
+[node name="rock" type="Button" parent="Control/HBoxContainer" unique_id=915809378]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+text = "Rock"
+
+[node name="paper" type="Button" parent="Control/HBoxContainer" unique_id=1599971876]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+text = "Paper"
+
+[node name="scissors" type="Button" parent="Control/HBoxContainer" unique_id=1899724205]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+text = "Scissors"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Control" unique_id=2142222890]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="Control" unique_id=421085341]
+layout_mode = 0
+offset_left = 18.0
+offset_top = 226.0
+offset_right = 140.0
+offset_bottom = 249.0
+text = "AI: 0, HUMAN: 0"
+label_settings = SubResource("LabelSettings_csma6")
+
+[connection signal="pressed" from="Control/HBoxContainer/rock" to="." method="_on_button_pressed_rock"]
+[connection signal="pressed" from="Control/HBoxContainer/paper" to="." method="_on_button_pressed_paper"]
+[connection signal="pressed" from="Control/HBoxContainer/scissors" to="." method="_on_button_pressed_scissors"]
