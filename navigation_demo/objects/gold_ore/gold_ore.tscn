@@ -1,11 +1,9 @@
 [gd_scene format=3 uid="uid://bdcpdpi5ui2q1"]
 
 [ext_resource type="Texture2D" uid="uid://bwnyfmjautqub" path="res://navigation_demo/objects/gold_ore/gold_ore_sprite.tres" id="1_dvcvf"]
-[ext_resource type="PackedScene" uid="uid://cvho23v7566dm" path="res://environment_demo/interactable.tscn" id="1_f3x5x"]
-[ext_resource type="Script" uid="uid://dppd40c7tqhob" path="res://navigation_demo/objects/gold_ore/gold_ore.gd" id="1_srbq2"]
+[ext_resource type="PackedScene" uid="uid://rnw6vjamikjk" path="res://players/human/interactable.tscn" id="1_f3x5x"]
 
 [node name="GoldOre" type="Node2D" unique_id=521397584]
-script = ExtResource("1_srbq2")
 
 [node name="Interactable" parent="." unique_id=1305297039 groups=["gold"] instance=ExtResource("1_f3x5x")]
 
