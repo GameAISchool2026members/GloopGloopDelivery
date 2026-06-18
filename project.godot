@@ -23,6 +23,9 @@ window/stretch/mode="canvas_items"
 
 player=""
 interactable=""
+gold=""
+furnace=""
+iron=""
 
 [input]
 
