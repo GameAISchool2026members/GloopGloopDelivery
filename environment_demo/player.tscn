@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://ckudr8chj1kgo"]
+
+[ext_resource type="SpriteFrames" uid="uid://dtmg2480rb7hi" path="res://environment_demo/player.tres" id="1_4flbx"]
+[ext_resource type="Script" uid="uid://dc8r7nh06fld6" path="res://environment_demo/character_body_2d.gd" id="1_onrkg"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_onrkg"]
+radius = 21.095022
+
+[node name="Node2D" type="Node2D" unique_id=1842773098]
+
+[node name="body" type="CharacterBody2D" parent="." unique_id=9644110 groups=["player"]]
+script = ExtResource("1_onrkg")
+speed = null
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="body" unique_id=274605707]
+texture_filter = 1
+sprite_frames = ExtResource("1_4flbx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="body" unique_id=1796559021]
+shape = SubResource("CircleShape2D_onrkg")
+
+[node name="InteractionArea" type="Area2D" parent="body" unique_id=1520098243]
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="body/InteractionArea" unique_id=126223714]
+shape = SubResource("CircleShape2D_onrkg")
+
+[connection signal="interact" from="body" to="body" method="_on_interact"]
