@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://8ff46jns7ll2" path="res://players/robot/robot_player.gd" id="1_pfglk"]
 [ext_resource type="PackedScene" uid="uid://dt2lp7yqcv0wo" path="res://players/robot/policy_predictor.tscn" id="2_53jri"]
-[ext_resource type="Texture2D" uid="uid://bd7l6i0voscv4" path="res://navigation_demo/resources/player_sprite.tres" id="3_ha7wq"]
+[ext_resource type="Texture2D" uid="uid://bpvjos7c7iwtw" path="res://players/robot/robot.png" id="3_gcp5k"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p7nr7"]
 size = Vector2(8, 8)
@@ -13,7 +13,7 @@ script = ExtResource("1_pfglk")
 [node name="PolicyPredictor" parent="." unique_id=1970150874 instance=ExtResource("2_53jri")]
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=6830948]
-texture = ExtResource("3_ha7wq")
+texture = ExtResource("3_gcp5k")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=79676028]
 shape = SubResource("RectangleShape2D_p7nr7")
