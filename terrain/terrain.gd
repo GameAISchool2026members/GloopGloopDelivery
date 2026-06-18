@@ -62,6 +62,7 @@ func generate():
 func _generate_all():
 	# clean potential old level
 	_pois = []
+	spawns = []
 	for c in get_children():
 		c.queue_free()
 	
