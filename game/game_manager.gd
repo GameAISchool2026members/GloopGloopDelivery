@@ -1,0 +1,43 @@
+class_name GameManager extends Node2D
+
+@onready var gui : GameGUI = $"../GUI"
+
+@export var game_length :float = 100
+
+var score : float = 0
+var timer : float = 0
+
+enum State { START, GAME, END }
+var state : State = State.START
+
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	_start_game()
+	
+func _start_game() -> void:
+	timer = game_length
+	state = State.GAME
+	
+	# todo play start animation?
+
+func _process_game(delta: float) -> void:
+	timer -= delta
+	
+	gui.set_score_value(score)
+	gui.set_timer_value(timer)
+	
+	if timer <= 0:
+		_end_game()
+	
+func _end_game() -> void:
+	state = State.END
+	print("game over")
+	
+	#show end screen?
+	
+
+func _process(delta: float) -> void:
+	if state == State.GAME:
+		_process_game(delta)

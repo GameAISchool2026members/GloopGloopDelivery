@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://dt2lp7yqcv0wo"]
+
+[ext_resource type="Script" uid="uid://dj5tp7jo6ab01" path="res://robot_companion/policy_predictor.gd" id="1_vk6kh"]
+
+[node name="PolicyPredictor" type="Node2D" unique_id=1970150874]
+script = ExtResource("1_vk6kh")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2023147197]
+position = Vector2(-0.825, 0)
