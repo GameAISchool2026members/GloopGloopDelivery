@@ -78,6 +78,7 @@ grow_vertical = 2
 
 [node name="Play" type="Button" parent="CanvasLayer/GUI/HBoxContainer" unique_id=1592658290]
 layout_mode = 2
-text = "PLAY"
+theme_override_font_sizes/font_size = 60
+text = "> ENTER THE UNIVERSE <"
 
 [connection signal="pressed" from="CanvasLayer/GUI/HBoxContainer/Play" to="." method="_on_play_pressed"]
