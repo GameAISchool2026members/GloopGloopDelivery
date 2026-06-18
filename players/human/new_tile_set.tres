@@ -1,7 +1,7 @@
 [gd_resource type="TileSet" format=3 uid="uid://c4ai1u8yybhho"]
 
-[ext_resource type="Texture2D" uid="uid://cpry3414in2l" path="res://environment_demo/Tileset_SpookyMansion_16x16_FREE.png" id="1_ujgj0"]
-[ext_resource type="Texture2D" uid="uid://dijutb00hab5e" path="res://environment_demo/spr_terrains.png" id="2_02c43"]
+[ext_resource type="Texture2D" uid="uid://cpry3414in2l" path="res://players/human/Tileset_SpookyMansion_16x16_FREE.png" id="1_ujgj0"]
+[ext_resource type="Texture2D" uid="uid://dijutb00hab5e" path="res://players/human/spr_terrains.png" id="2_02c43"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_peyie"]
 texture = ExtResource("1_ujgj0")

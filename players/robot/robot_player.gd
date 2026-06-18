@@ -1,6 +1,4 @@
-class_name Companion extends CharacterBody2D
-
-const SPEED = 300.0
+class_name RobotPlayer extends Player
 
 enum State { IDLE, WALKING_TO_ITEM, WALKING_WITH_ITEM, WAITING }
 var state : State = State.IDLE

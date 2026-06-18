@@ -9,9 +9,9 @@ var active_objectives: Array[Node2D] = []
 
 var history_buffer: Array[PackedFloat32Array] = []
 
-func _ready() -> void:
-	# Example: 3 snapshots * 2 objective metrics = 6 inputs -> 3 predicted intent states
-	mlp.build_structure([6, 16, 3], [mlp.Activation.TANH, mlp.Activation.SOFTMAX])
+func init(num_objectves : int, player : CharacterBody2D) -> void:
+	mlp = GodotMLP.new()
+	mlp.build_structure([6, 16, num_objectves], [mlp.Activation.TANH, mlp.Activation.SOFTMAX])
 
 func update_prediction(delta: float) -> PackedFloat32Array:
 	if not is_instance_valid(player) or active_objectives.is_empty():
