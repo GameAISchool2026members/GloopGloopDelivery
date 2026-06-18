@@ -1,8 +1,11 @@
 [gd_scene format=3 uid="uid://bjno6tvo3sc2s"]
 
 [ext_resource type="Texture2D" uid="uid://dcr1bnh06eca1" path="res://navigation_demo/objects/iron_ore/iron_ore_sprite.tres" id="1_7irfx"]
+[ext_resource type="PackedScene" uid="uid://cvho23v7566dm" path="res://environment_demo/interactable.tscn" id="2_qlpun"]
 
 [node name="IronOre" type="Node2D" unique_id=521397584]
+
+[node name="Interactable" parent="." unique_id=1305297039 groups=["iron"] instance=ExtResource("2_qlpun")]
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1527274717]
 texture = ExtResource("1_7irfx")
