@@ -1,0 +1,59 @@
+[gd_scene format=3 uid="uid://boul7rc1mdwha"]
+
+[ext_resource type="FontFile" uid="uid://d1i07hb3kmrks" path="res://assets/font/8-bit-hud.ttf" id="1_l1rk1"]
+[ext_resource type="Script" uid="uid://c88igffmy7cfq" path="res://game/game_manager.gd" id="1_vasa2"]
+[ext_resource type="Script" uid="uid://ctek3ueshgrhr" path="res://game/gui.gd" id="2_4fuuu"]
+[ext_resource type="PackedScene" uid="uid://b8b8erpuqqxvy" path="res://robot_companion/companion.tscn" id="3_h7iqs"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_vasa2"]
+font = ExtResource("1_l1rk1")
+font_size = 36
+shadow_size = 2
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(5, 5)
+
+[node name="Game" type="Node2D" unique_id=1353891694]
+
+[node name="GameManager" type="Node2D" parent="." unique_id=385739205]
+script = ExtResource("1_vasa2")
+
+[node name="GUI" type="Control" parent="." unique_id=521750349]
+custom_minimum_size = Vector2(1152, 648)
+layout_direction = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -576.0
+offset_top = -324.0
+offset_right = 576.0
+offset_bottom = 324.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_4fuuu")
+
+[node name="Score" type="Label" parent="GUI" unique_id=1806668851]
+layout_mode = 1
+offset_right = 792.0
+offset_bottom = 59.0
+text = "Score: 0"
+label_settings = SubResource("LabelSettings_vasa2")
+
+[node name="Timer" type="Label" parent="GUI" unique_id=228366306]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -396.0
+offset_right = 396.0
+offset_bottom = 59.0
+grow_horizontal = 2
+text = "100"
+label_settings = SubResource("LabelSettings_vasa2")
+horizontal_alignment = 1
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1925882695]
+
+[node name="Players" type="Node2D" parent="." unique_id=1032971318]
+
+[node name="Companion" parent="Players" unique_id=274457977 instance=ExtResource("3_h7iqs")]

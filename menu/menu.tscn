@@ -1,0 +1,76 @@
+[gd_scene format=3 uid="uid://cc5ulojwcn4be"]
+
+[ext_resource type="Shader" uid="uid://bghbbpxi8x84w" path="res://menu/sky.gdshader" id="1_g18jx"]
+[ext_resource type="FontFile" uid="uid://d1i07hb3kmrks" path="res://assets/font/8-bit-hud.ttf" id="1_j0t7f"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6nwqt"]
+shader = ExtResource("1_g18jx")
+shader_parameter/background_color = Color(0.03, 0.03, 0.07, 1)
+shader_parameter/nebula_color1 = Color(0.2, 0.05, 0.4, 0.4)
+shader_parameter/nebula_color2 = Color(0.05, 0.3, 0.4, 0.3)
+shader_parameter/star_density = 40.0
+shader_parameter/nebula_scale = 5.0
+shader_parameter/twinkle_speed = 0.2000000095
+
+[sub_resource type="LabelSettings" id="LabelSettings_jc4t8"]
+font = ExtResource("1_j0t7f")
+font_size = 36
+shadow_size = 2
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(5, 5)
+
+[node name="Menu" type="Node2D" unique_id=5250221]
+
+[node name="GUI" type="Control" parent="." unique_id=2015773199]
+custom_minimum_size = Vector2(1152, 648)
+layout_direction = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="GUI" unique_id=2038679116]
+material = SubResource("ShaderMaterial_6nwqt")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0253638, 0.0253638, 0.025363795, 1)
+
+[node name="Title" type="Label" parent="GUI" unique_id=773592472]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -396.0
+offset_top = 20.0
+offset_right = 396.0
+offset_bottom = 79.0
+grow_horizontal = 2
+text = "Gloop Gloop Deliver"
+label_settings = SubResource("LabelSettings_jc4t8")
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GUI" unique_id=97379704]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Play" type="Button" parent="GUI/HBoxContainer" unique_id=1592658290]
+layout_mode = 2
+text = "PLAY"
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=2114186769]

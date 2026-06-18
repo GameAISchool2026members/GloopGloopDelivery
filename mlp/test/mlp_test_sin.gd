@@ -9,14 +9,14 @@ var training_thread := Thread.new()
 func _ready() -> void:
 	mlp.learning_rate = 0.001
 	mlp.loss_function = mlp.LossFunction.MSE
-	mlp.build_structure([1, 32, 32, 1], [mlp.Activation.RELU, mlp.Activation.RELU, mlp.Activation.LINEAR])
+	mlp.build_structure([1, 32, 32, 1], [mlp.Activation.TANH, mlp.Activation.TANH, mlp.Activation.LINEAR])
 	
 	# Start training in background
 	training_thread.start(_train_and_validate)
 
 func _train_and_validate() -> void:
-	var epochs := 100
-	var examples_per_epoch := 200
+	var epochs := 1000
+	var examples_per_epoch := 50
 	
 	for epoch in range(epochs):
 		var total_loss := 0.0
@@ -26,7 +26,8 @@ func _train_and_validate() -> void:
 		
 		if epoch % 20 == 0:
 			print("Epoch %d | Avg Loss: %.6f" % [epoch, total_loss / examples_per_epoch])
-	
+			_update_graph.call_deferred()
+			
 	_perform_validation()
 	# Update visualization on the main thread
 	call_deferred("_update_graph")
