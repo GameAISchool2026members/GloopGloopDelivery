@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://bvbbud0471kp8"]
+
+[ext_resource type="AudioStream" uid="uid://coh0m8g4eiiso" path="res://audio/gloopgloop.ogg" id="1_0uqv8"]
+
+[node name="MusicPlayer" type="AudioStreamPlayer2D" unique_id=1046645677]
+stream = ExtResource("1_0uqv8")
+autoplay = true
