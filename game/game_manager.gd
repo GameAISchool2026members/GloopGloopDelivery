@@ -1,8 +1,13 @@
 class_name GameManager extends Node2D
 
-@onready var gui : GameGUI = $"../GUI"
+@onready var gui : GameGUI = $"../Camera2D/GUI"
 
 @export var game_length :float = 100
+
+@export var human_player : Player
+@export var robot_player : Player
+@export var tile_map_layer : TileMapLayer
+@export var objectives_manager : ObjectivesManager
 
 var score : float = 0
 var timer : float = 0
