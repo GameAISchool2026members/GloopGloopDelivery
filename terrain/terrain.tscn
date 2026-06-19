@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://dxv44t1na7jg0"]
 
-[ext_resource type="TileSet" uid="uid://dli2rfow54owf" path="res://navigation_demo/tiles/tileset.tres" id="1_w0yrf"]
-[ext_resource type="Script" uid="uid://mj8q4ma705q" path="res://navigation_demo/terrain.gd" id="2_pog3h"]
-[ext_resource type="PackedScene" uid="uid://bjno6tvo3sc2s" path="res://navigation_demo/objects/iron_ore/iron_ore.tscn" id="3_d183r"]
-[ext_resource type="PackedScene" uid="uid://bdcpdpi5ui2q1" path="res://navigation_demo/objects/gold_ore/gold_ore.tscn" id="4_knpvx"]
-[ext_resource type="PackedScene" uid="uid://ccyvh84kwayqn" path="res://navigation_demo/objects/furnace/furnace.tscn" id="5_fo2a7"]
-[ext_resource type="PackedScene" uid="uid://dtdnjx0jaxob2" path="res://navigation_demo/objects/collection_point/collection_point.tscn" id="6_pfd5i"]
+[ext_resource type="TileSet" uid="uid://dli2rfow54owf" path="res://terrain/tiles/tileset.tres" id="1_w0yrf"]
+[ext_resource type="Script" uid="uid://mj8q4ma705q" path="res://terrain/terrain.gd" id="2_pog3h"]
+[ext_resource type="PackedScene" uid="uid://bjno6tvo3sc2s" path="res://objects/iron_ore/iron_ore.tscn" id="3_d183r"]
+[ext_resource type="PackedScene" uid="uid://bdcpdpi5ui2q1" path="res://objects/gold_ore/gold_ore.tscn" id="4_knpvx"]
+[ext_resource type="PackedScene" uid="uid://ccyvh84kwayqn" path="res://objects/furnace/furnace.tscn" id="5_fo2a7"]
+[ext_resource type="PackedScene" uid="uid://dtdnjx0jaxob2" path="res://objects/collection_point/collection_point.tscn" id="6_pfd5i"]
 
 [node name="Terrain" type="TileMapLayer" unique_id=879474183]
 tile_set = ExtResource("1_w0yrf")

@@ -1,7 +1,7 @@
 class_name HumanPlayer extends Player
 
 signal interact
-signal pickup_objective(Entity: Node2D)
+signal pickup_objective(item: Item)
 
 @export var game_manager : GameManager
 @onready var interaction_area: Area2D = $InteractionArea
@@ -19,14 +19,14 @@ func _process(delta):
 	# interactions
 	super(delta)
 	if Input.is_action_just_pressed("interact"):
-		print("interact")
+		#print("interact")
 		if(touching != null):
 			var groups = touching.get_groups()
-			print("interacting with interactable")
+			#print("interacting with interactable")
 			if ECS.has_component(touching, ResourceComponent):
-				print("has it!")
+				#print("has it!")
 				item = ECS.get_component(touching, ResourceComponent).item
-			pickup_objective.emit(touching)
+			pickup_objective.emit(item)
 			
 
 func get_input():
