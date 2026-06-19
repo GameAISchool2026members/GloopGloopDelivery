@@ -4,7 +4,6 @@ class_name GameManager extends Node2D
 
 @export var game_length :float = 100
 @export var score_table: Dictionary[Item, int]
-
 @export var human_player : Player
 @export var robot_player : Player
 @export var terrain : Terrain
@@ -13,12 +12,16 @@ class_name GameManager extends Node2D
 
 var score : float = 0
 var timer : float = 0
-
 enum State { START, GAME, END }
 var state : State = State.START
 
 func _signal_bus_item_collected(item: Item) -> void:
 	print("score!")
+	for item_score in score_table:
+		if item==item_score:
+			score_table[item_score] -= 1
+		else:
+			score_table[item_score] += 1
 	var points = score_table[item]
 	score += points
 
@@ -47,7 +50,7 @@ func _process_game(delta: float) -> void:
 	
 	gui.set_score_value(score)
 	gui.set_timer_value(timer)
-	
+	gui.set_score_table_value(score_table)
 	if timer <= 0:
 		_end_game()
 	

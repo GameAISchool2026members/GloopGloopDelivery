@@ -7,7 +7,7 @@
 
 # MVP
 - twee grondstoffen ijzer goud
-- 1 verwerker over
+- 1 verwerker oven
 - player character
 	- player controller movement & interaction
 - blauwe bot

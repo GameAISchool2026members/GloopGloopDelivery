@@ -59,6 +59,20 @@ text = "100"
 label_settings = SubResource("LabelSettings_vasa2")
 horizontal_alignment = 1
 
+[node name="ScoreTable" type="Label" parent="CanvasLayer/GUI" unique_id=1606029131]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.082
+offset_left = 141.0
+offset_top = 13.0
+offset_right = 567.0
+offset_bottom = 187.95999
+grow_horizontal = 2
+label_settings = SubResource("LabelSettings_vasa2")
+horizontal_alignment = 2
+
 [node name="GameManager" type="Node2D" parent="." unique_id=385739205 node_paths=PackedStringArray("human_player", "robot_player", "terrain", "objectives_manager")]
 script = ExtResource("1_vasa2")
 score_table = Dictionary[ExtResource("4_qf6n1"), int]({
