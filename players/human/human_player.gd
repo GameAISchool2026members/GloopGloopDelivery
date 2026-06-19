@@ -26,7 +26,12 @@ func _process(delta):
 			if ECS.has_component(touching, ResourceComponent):
 				#print("has it!")
 				item = ECS.get_component(touching, ResourceComponent).item
-			pickup_objective.emit(item)
+				pickup_objective.emit(item)
+			if ECS.has_component(touching, InventoryComponent) and item:
+				var inv = ECS.get_component(touching, InventoryComponent) as InventoryComponent
+				inv.add(item)
+				item = null
+			#pickup_objective.emit(touching)
 			
 
 func get_input():
@@ -41,10 +46,9 @@ func _physics_process(delta):
 func _on_interaction_area_entered(area: Area2D) -> void:
 	print("touch")
 	print(area.get_groups())
-	if area.is_in_group("interactable"):
-		print("interacts with other body ")
-		touching = area.get_parent()
-		print("Player touched interactable!")
+	print("interacts with other body ")
+	touching = area.get_parent()
+	print("Player touched interactable!")
 		
 func _on_interaction_area_exited(body: Area2D) -> void:
 	print("touch")
