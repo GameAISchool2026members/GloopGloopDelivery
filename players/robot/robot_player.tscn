@@ -4,6 +4,29 @@
 [ext_resource type="PackedScene" uid="uid://dt2lp7yqcv0wo" path="res://players/robot/policy_predictor.tscn" id="2_53jri"]
 [ext_resource type="Texture2D" uid="uid://bpvjos7c7iwtw" path="res://players/robot/robot.png" id="3_gcp5k"]
 [ext_resource type="Texture2D" uid="uid://d22mwy3mcvvf6" path="res://items/gold_ore/gold_ore.png" id="4_xxa81"]
+[ext_resource type="Texture2D" uid="uid://f8hd465vb1kv" path="res://players/robot/frown.png" id="5_y050i"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xxa81"]
+atlas = ExtResource("3_gcp5k")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y050i"]
+atlas = ExtResource("3_gcp5k")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nvhv3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xxa81")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y050i")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p7nr7"]
 size = Vector2(8, 8)
@@ -18,8 +41,10 @@ speed = 100
 
 [node name="PolicyPredictor" parent="." unique_id=1970150874 instance=ExtResource("2_53jri")]
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=6830948]
-texture = ExtResource("3_gcp5k")
+[node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=1942225351]
+sprite_frames = SubResource("SpriteFrames_nvhv3")
+autoplay = "default"
+frame_progress = 0.7742825
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=79676028]
 shape = SubResource("RectangleShape2D_p7nr7")
@@ -47,3 +72,18 @@ layout_mode = 2
 texture = ExtResource("4_xxa81")
 expand_mode = 1
 stretch_mode = 2
+
+[node name="Particles" type="CPUParticles2D" parent="." unique_id=916823859]
+emitting = false
+amount = 4
+texture = ExtResource("5_y050i")
+lifetime = 0.5
+one_shot = true
+speed_scale = 0.5
+emission_shape = 2
+emission_sphere_radius = 10.0
+direction = Vector2(0, -1)
+spread = 0.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 20.0

@@ -19,3 +19,11 @@
 
 # MVP+
 - emotes & communicatie
+- na refactor:
+- emote voor furnace en crate
+- idle animations
+- bored meter vanwege niet genoeg diversiteit in de targets van de robot
+- bored particle (bliksem)
+
+
+- 
