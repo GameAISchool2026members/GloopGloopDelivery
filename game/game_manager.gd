@@ -27,6 +27,8 @@ func _signal_bus_item_collected(item: Item) -> void:
 
 func _enter_tree() -> void:
 	terrain.generate()
+	if objectives_manager:
+		objectives_manager.game_manager = self
 	
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -36,9 +38,6 @@ func _ready() -> void:
 	
 func _start_game() -> void:
 	timer = game_length
-	
-	
-	
 	objectives_manager.find_all_objectes()
 	human_player.global_position = terrain.map_to_local(terrain.spawns[0])
 	robot_player.global_position = terrain.map_to_local(terrain.spawns[1]) 

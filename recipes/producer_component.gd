@@ -30,6 +30,11 @@ func pickup() -> Item:
 	_display()
 	return item
 
+func peak_item() -> Item:
+	if processed_items.is_empty():
+		return null
+	return processed_items.front()
+
 func process_item() -> void:
 	if is_input_empty():
 		return
