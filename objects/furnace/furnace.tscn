@@ -16,6 +16,26 @@ texture = ExtResource("1_xhc34")
 
 [node name="Interactable" parent="." unique_id=1305297039 instance=ExtResource("2_bddj4")]
 
-[node name="ProducerComponent" parent="." unique_id=2097329424 instance=ExtResource("4_jugis")]
+[node name="ProducerComponent" parent="." unique_id=2097329424 node_paths=PackedStringArray("label") instance=ExtResource("4_jugis")]
+label = NodePath("../RichTextLabel")
 recipes = Array[ExtResource("5_5ja5n")]([ExtResource("6_pyh5g"), ExtResource("7_hvdpc")])
 delay = 3
+
+[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=1318913053]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -15.0
+offset_top = -36.0
+offset_right = 15.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/normal_font_size = 12
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1

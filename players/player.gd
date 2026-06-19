@@ -26,20 +26,24 @@ func _interact():
 	if(touching != null):
 		var groups = touching.get_groups()
 		#print("interacting with interactable")
-		if ECS.has_component(touching, ResourceComponent):
+		if ECS.has_component(touching, ResourceComponent) and not item:
 			#print("has it!")
 			item = ECS.get_component(touching, ResourceComponent).item
 			pickup_objective.emit(item)
+			return
 		if ECS.has_component(touching, InventoryComponent) and item:
 			var inv = ECS.get_component(touching, InventoryComponent) as InventoryComponent
 			inv.add(item)
 			item = null
+			return
 		if ECS.has_component(touching, ProducerComponent) and item:
 			var furnace = ECS.get_component(touching, ProducerComponent) as ProducerComponent
 			var delivered = furnace.produce_item(item)
 			if delivered:	
 					item = null
+			return
 		if ECS.has_component(touching, ProducerComponent) and not item:
 			var furnace = ECS.get_component(touching, ProducerComponent) as ProducerComponent
 			item = furnace.pickup()
+			return
 		#pickup_objective.emit(touching)
