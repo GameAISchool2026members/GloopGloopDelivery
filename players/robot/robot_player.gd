@@ -104,6 +104,7 @@ func find_target() -> void:
 			potential_objective.name, 
 			prediction_probs[idx] * 100.0
 		])			
+		_emote(potential_objective)
 		_move_to_global_pos(target_position)
 		state = State.WALKING_TO_ITEM
 		break
@@ -111,6 +112,10 @@ func find_target() -> void:
 	if not target_found:
 		print("All neglected objectives are currently invalid or unreachable.")
 	
+func _emote(node: Node2D):
+	var resource = ECS.get_component(node, ResourceComponent) as ResourceComponent
+	if resource:
+		$PanelContainer/TextureRect.texture = resource.item.texture
 
 func _is_objective_valid_target(objective: Node2D) -> bool:
 	return true

@@ -8,6 +8,13 @@
 [ext_resource type="Resource" uid="uid://dh3ye5y7fa0n0" path="res://recipes/smelt_gold.tres" id="6_pyh5g"]
 [ext_resource type="Resource" uid="uid://b8hbq5hu6b13o" path="res://recipes/smelt_iron.tres" id="7_hvdpc"]
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qcspv"]
+particle_flag_disable_z = true
+radial_velocity_min = -2.2351742e-05
+radial_velocity_max = 4.9999776
+scale_min = 2.0
+scale_max = 3.0
+
 [node name="Furnace" type="Node2D" unique_id=521397584]
 script = ExtResource("1_qcspv")
 
@@ -16,6 +23,33 @@ texture = ExtResource("1_xhc34")
 
 [node name="Interactable" parent="." unique_id=1305297039 instance=ExtResource("2_bddj4")]
 
-[node name="ProducerComponent" parent="." unique_id=2097329424 instance=ExtResource("4_jugis")]
+[node name="ProducerComponent" parent="." unique_id=2097329424 node_paths=PackedStringArray("label") instance=ExtResource("4_jugis")]
+label = NodePath("../RichTextLabel")
 recipes = Array[ExtResource("5_5ja5n")]([ExtResource("6_pyh5g"), ExtResource("7_hvdpc")])
 delay = 3
+
+[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=1318913053]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -15.0
+offset_top = -36.0
+offset_right = 15.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/normal_font_size = 12
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Particles" type="GPUParticles2D" parent="." unique_id=1239222572]
+position = Vector2(0, -8)
+amount = 9
+lifetime = 2.0
+speed_scale = 0.5
+process_material = SubResource("ParticleProcessMaterial_qcspv")
