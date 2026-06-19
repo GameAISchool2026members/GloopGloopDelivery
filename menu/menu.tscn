@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://xo5wer8uquv3" path="res://menu/menu.gd" id="1_6nwqt"]
 [ext_resource type="Shader" uid="uid://bghbbpxi8x84w" path="res://menu/sky.gdshader" id="1_g18jx"]
 [ext_resource type="FontFile" uid="uid://d1i07hb3kmrks" path="res://assets/font/8-bit-hud.ttf" id="1_j0t7f"]
+[ext_resource type="Texture2D" uid="uid://kw5302i5rm6m" path="res://players/human/human.png" id="4_pbjm4"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6nwqt"]
 shader = ExtResource("1_g18jx")
@@ -15,13 +16,15 @@ shader_parameter/twinkle_speed = 0.2000000095
 
 [sub_resource type="LabelSettings" id="LabelSettings_jc4t8"]
 font = ExtResource("1_j0t7f")
-font_size = 36
+font_size = 42
+font_color = Color(1, 0.7254902, 0.3254902, 1)
 shadow_size = 2
 shadow_color = Color(0, 0, 0, 1)
 shadow_offset = Vector2(5, 5)
 
 [sub_resource type="LabelSettings" id="LabelSettings_pbjm4"]
 font = ExtResource("1_j0t7f")
+font_size = 14
 shadow_size = 2
 shadow_color = Color(0, 0, 0, 1)
 shadow_offset = Vector2(5, 5)
@@ -72,9 +75,9 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -550.0
-offset_top = 118.0
+offset_top = 180.0
 offset_right = 554.0
-offset_bottom = 297.0
+offset_bottom = 358.99985
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 10
 text = "On mars, aliens collect as much valuable resources as possible.
@@ -91,10 +94,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
+offset_left = -483.5
+offset_top = 90.0
+offset_right = 483.5
+offset_bottom = 157.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -103,6 +106,14 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("1_j0t7f")
 theme_override_font_sizes/font_size = 36
 text = "> ENTER THE UNIVERSE <"
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/GUI" unique_id=2088658996]
+layout_mode = 0
+offset_left = 101.0
+offset_top = 543.0
+offset_right = 223.0
+offset_bottom = 684.0
+texture = ExtResource("4_pbjm4")
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=308281996]
 anchors_preset = 12
