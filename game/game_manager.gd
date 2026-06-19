@@ -8,7 +8,7 @@ class_name GameManager extends Node2D
 @export var robot_player : Player
 @export var terrain : Terrain
 @export var objectives_manager : ObjectivesManager
-
+@export var end_screen : Control
 
 var score : float = 0
 var timer : float = 0
@@ -81,6 +81,8 @@ func _process_game(delta: float) -> void:
 func _end_game() -> void:
 	state = State.END
 	print("game over")
+	
+	end_screen.trigger_end_screen()
 	
 	#show end screen?
 	

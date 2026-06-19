@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://ctek3ueshgrhr" path="res://game/gui.gd" id="2_4fuuu"]
 [ext_resource type="Script" uid="uid://bydlo2gs47d03" path="res://game/objectives_manager.gd" id="2_dxrkv"]
 [ext_resource type="Shader" uid="uid://cttod264npo7d" path="res://game/environment/world_shader.gdshader" id="3_vsp63"]
-[ext_resource type="Texture2D" uid="uid://f8hd465vb1kv" path="res://players/robot/frown.png" id="4_b686c"]
+[ext_resource type="Script" uid="uid://ov8unn5nqw48" path="res://game/end_game.gd" id="4_b686c"]
 [ext_resource type="Script" uid="uid://b15niow2uxp3x" path="res://items/item.gd" id="4_qf6n1"]
 [ext_resource type="PackedScene" uid="uid://dxv44t1na7jg0" path="res://terrain/terrain.tscn" id="5_u5opy"]
 [ext_resource type="Resource" uid="uid://byf1vmw0qh5t2" path="res://items/iron_ore/iron_ore.tres" id="5_vsp63"]
@@ -34,15 +34,31 @@ shadow_size = 2
 shadow_color = Color(0, 0, 0, 1)
 shadow_offset = Vector2(5, 5)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hb504"]
-bg_color = Color(0, 0, 0, 1)
+[sub_resource type="LabelSettings" id="LabelSettings_vsp63"]
+font = ExtResource("1_l1rk1")
+font_size = 36
+shadow_size = 2
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(5, 5)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ee6o4"]
-bg_color = Color(1, 0, 0.18431373, 1)
+[sub_resource type="LabelSettings" id="LabelSettings_b686c"]
+font = ExtResource("1_l1rk1")
+font_size = 32
+shadow_size = 2
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(5, 5)
 
 [node name="Game" type="Node2D" unique_id=1353891694]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=849448451]
+
+[node name="ScreenEffects" type="ColorRect" parent="CanvasLayer" unique_id=168629776]
+material = SubResource("ShaderMaterial_b686c")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="GUI" type="Control" parent="CanvasLayer" unique_id=521750349]
 layout_direction = 1
@@ -53,15 +69,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_4fuuu")
-
-[node name="ScreenEffects" type="ColorRect" parent="CanvasLayer/GUI" unique_id=168629776]
-material = SubResource("ShaderMaterial_b686c")
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
 
 [node name="Score" type="Label" parent="CanvasLayer/GUI" unique_id=1806668851]
 layout_mode = 1
@@ -107,20 +114,80 @@ offset_left = 19.0
 offset_top = 662.0
 offset_right = 222.0
 offset_bottom = 695.0
-theme_override_styles/background = SubResource("StyleBoxFlat_hb504")
-theme_override_styles/fill = SubResource("StyleBoxFlat_ee6o4")
-max_value = 5.0
-value = 3.0
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/GUI" unique_id=2001953581]
-layout_mode = 0
-offset_left = 230.0
-offset_top = 656.0
-offset_right = 270.0
-offset_bottom = 696.0
-texture = ExtResource("4_b686c")
+[node name="EndGame" type="Control" parent="CanvasLayer" unique_id=1028935202 node_paths=PackedStringArray("GUI", "game_manager", "score_label")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_b686c")
+GUI = NodePath("../GUI")
+game_manager = NodePath("../../GameManager")
+score_label = NodePath("FinalScore")
 
-[node name="GameManager" type="Node2D" parent="." unique_id=385739205 node_paths=PackedStringArray("human_player", "robot_player", "terrain", "objectives_manager")]
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/EndGame" unique_id=1212494621]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.40784314)
+
+[node name="Title" type="Label" parent="CanvasLayer/EndGame" unique_id=1394017215]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -396.0
+offset_top = 100.0
+offset_right = 396.0
+offset_bottom = 159.0
+grow_horizontal = 2
+text = "GAME OVER"
+label_settings = SubResource("LabelSettings_vsp63")
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/EndGame" unique_id=1544225251]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Menu" type="Button" parent="CanvasLayer/EndGame/HBoxContainer" unique_id=1306775064]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_l1rk1")
+theme_override_font_sizes/font_size = 45
+text = "> BACK TO MENU <"
+
+[node name="FinalScore" type="Label" parent="CanvasLayer/EndGame" unique_id=666379784]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -396.0
+offset_top = -110.0
+offset_right = 396.0
+offset_bottom = -51.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Final Score: 1000"
+label_settings = SubResource("LabelSettings_b686c")
+horizontal_alignment = 1
+
+[node name="GameManager" type="Node2D" parent="." unique_id=385739205 node_paths=PackedStringArray("human_player", "robot_player", "terrain", "objectives_manager", "end_screen")]
 script = ExtResource("1_vasa2")
 score_table = Dictionary[ExtResource("4_qf6n1"), float]({
 ExtResource("5_vsp63"): 1.0,
@@ -132,6 +199,7 @@ human_player = NodePath("../Players/HumanPlayer")
 robot_player = NodePath("../Players/RobotPlayer")
 terrain = NodePath("../Environment/Terrain")
 objectives_manager = NodePath("../ObjectivesManager")
+end_screen = NodePath("../CanvasLayer/EndGame")
 
 [node name="ObjectivesManager" type="Node2D" parent="." unique_id=29152518]
 script = ExtResource("2_dxrkv")
@@ -158,3 +226,5 @@ game_manager = NodePath("../../GameManager")
 [node name="RobotPlayer" parent="Players" unique_id=274457977 node_paths=PackedStringArray("game_manager") instance=ExtResource("6_u5opy")]
 result_weight = 0.2
 game_manager = NodePath("../../GameManager")
+
+[connection signal="pressed" from="CanvasLayer/EndGame/HBoxContainer/Menu" to="CanvasLayer/EndGame" method="_on_play_pressed"]

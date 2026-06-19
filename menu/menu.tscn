@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://xo5wer8uquv3" path="res://menu/menu.gd" id="1_6nwqt"]
 [ext_resource type="Shader" uid="uid://bghbbpxi8x84w" path="res://menu/sky.gdshader" id="1_g18jx"]
 [ext_resource type="FontFile" uid="uid://d1i07hb3kmrks" path="res://assets/font/8-bit-hud.ttf" id="1_j0t7f"]
-[ext_resource type="PackedScene" uid="uid://boul7rc1mdwha" path="res://game/game.tscn" id="2_pbjm4"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6nwqt"]
 shader = ExtResource("1_g18jx")
@@ -29,7 +28,6 @@ shadow_offset = Vector2(5, 5)
 
 [node name="Menu" type="Node2D" unique_id=5250221]
 script = ExtResource("1_6nwqt")
-game = ExtResource("2_pbjm4")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=2114186769]
 
@@ -102,7 +100,18 @@ grow_vertical = 2
 
 [node name="Play" type="Button" parent="CanvasLayer/GUI/HBoxContainer" unique_id=1592658290]
 layout_mode = 2
-theme_override_font_sizes/font_size = 60
+theme_override_fonts/font = ExtResource("1_j0t7f")
+theme_override_font_sizes/font_size = 36
 text = "> ENTER THE UNIVERSE <"
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=308281996]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -83.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.5294118, 0.3647059, 0.34509805, 1)
 
 [connection signal="pressed" from="CanvasLayer/GUI/HBoxContainer/Play" to="." method="_on_play_pressed"]
