@@ -243,7 +243,6 @@ obstacle_percentage = 0.05
 game_manager = NodePath("../../GameManager")
 
 [node name="RobotPlayer" parent="Players" unique_id=274457977 node_paths=PackedStringArray("game_manager") instance=ExtResource("6_u5opy")]
-result_weight = 0.1
 game_manager = NodePath("../../GameManager")
 
 [connection signal="pressed" from="CanvasLayer/EndGame/HBoxContainer/Menu" to="CanvasLayer/EndGame" method="_on_play_pressed"]
