@@ -44,7 +44,7 @@ speed = 100
 [node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=1942225351]
 sprite_frames = SubResource("SpriteFrames_nvhv3")
 autoplay = "default"
-frame_progress = 0.7742825
+frame_progress = 0.6647651
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=79676028]
 shape = SubResource("RectangleShape2D_p7nr7")
@@ -61,17 +61,40 @@ shape = SubResource("CircleShape2D_gcp5k")
 position = Vector2(0, -8.56)
 scale = Vector2(0.5, 0.5)
 
-[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1155779446]
-offset_left = -7.0
-offset_top = -24.0
-offset_right = 9.0
-offset_bottom = -8.0
+[node name="Panel" type="Panel" parent="." unique_id=1837737897]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -6.0
+offset_top = -26.0
+offset_right = 6.0
+offset_bottom = -14.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 
-[node name="TextureRect" type="TextureRect" parent="PanelContainer" unique_id=1540946075]
+[node name="PanelContainer" type="PanelContainer" parent="Panel" unique_id=1155779446]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+
+[node name="TextureRect" type="TextureRect" parent="Panel/PanelContainer" unique_id=1540946075]
 layout_mode = 2
 texture = ExtResource("4_xxa81")
-expand_mode = 1
-stretch_mode = 2
+expand_mode = 2
 
 [node name="Particles" type="CPUParticles2D" parent="." unique_id=916823859]
 emitting = false

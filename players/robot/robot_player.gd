@@ -121,7 +121,7 @@ func find_target() -> void:
 		selected_objective_dict.sampling_weight * 100.0
 	])            
 	
-	_emote(potential_objective_node)
+	_emote(target_node)
 	_move_to_global_pos(target_node.global_position)
 			
 	if not target_node:
@@ -151,9 +151,10 @@ func _softmax(raw_scores: PackedFloat32Array) -> PackedFloat32Array:
 	return result
 	
 func _emote(node: Node2D):
-	var resource = ECS.get_component(node, ResourceComponent) as ResourceComponent
-	if resource:
-		$PanelContainer/TextureRect.texture = resource.item.texture
+	# all nodes should have a sprite2d
+	var sprite = ECS.get_component(node, Sprite2D) as Sprite2D
+	if sprite:
+		$Panel/PanelContainer/TextureRect.texture = sprite.texture
 
 func _is_objective_valid_target(objective: Node2D) -> bool:
 	return true
