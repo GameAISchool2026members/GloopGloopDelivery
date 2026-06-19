@@ -3,11 +3,13 @@ class_name GameManager extends Node2D
 @onready var gui : GameGUI = $"../CanvasLayer/GUI"
 
 @export var game_length :float = 100
+@export var score_table: Dictionary[Item, int]
 
 @export var human_player : Player
 @export var robot_player : Player
 @export var terrain : Terrain
 @export var objectives_manager : ObjectivesManager
+
 
 var score : float = 0
 var timer : float = 0
@@ -15,12 +17,19 @@ var timer : float = 0
 enum State { START, GAME, END }
 var state : State = State.START
 
+func _signal_bus_item_collected(item: Item) -> void:
+	print("score!")
+	var points = score_table[item]
+	score += points
+
 func _enter_tree() -> void:
 	terrain.generate()
 	
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	_start_game()
+	SignalBus.item_collected.connect(_signal_bus_item_collected)
+	state = State.GAME
 	
 func _start_game() -> void:
 	timer = game_length
