@@ -21,6 +21,7 @@ func display():
 				"count": 0
 			}
 		counts[name].count += 1
+	label.clear()
 	for entry in counts.values():
-		label.add_image(entry.item.texture, 24, 24)
-		label.append_text(" %s x%d\n" % [entry.item.name, entry.count])
+		label.add_image(entry.item.texture, 8, 8)
+		label.append_text(" %d\n" % entry.count)
