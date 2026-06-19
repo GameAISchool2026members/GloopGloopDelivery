@@ -16,6 +16,8 @@ var history_items: Array = []
 var max_history_size: int = 6
 var evil: bool = false
 
+var time_no_movement : float = 0
+
 func _ready() -> void:
 	if game_manager == null:
 		print("uh oh")
@@ -60,6 +62,16 @@ func _physics_process(delta):
 		velocity = global_position.direction_to(target) * speed
 		
 	move_and_slide()
+	
+	if velocity.length_squared() < 0.1:
+		time_no_movement += delta
+	else:
+		time_no_movement = 0
+		
+	if time_no_movement > 2.0:
+		time_no_movement = 0.0
+		find_target()
+		print("band-aid!")
 
 func _move_to_global_pos(global_target_pos: Vector2):
 	var this_local = terrain.local_to_map(terrain.to_local(global_position))
