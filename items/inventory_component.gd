@@ -1,17 +1,15 @@
 class_name InventoryComponent extends Node
 
-signal added_to_inventory(item: Item)
-
 @export var label: RichTextLabel
 
 var inventory: Array[Item]
 
 func add(item: Item):
 	inventory.append(item)
-	added_to_inventory.emit(item)
-	display()
+	SignalBus.item_collected.emit(item)
+	_display()
 	
-func display():
+func _display():
 	var counts := {}
 	for item in inventory:
 		var name = item.name
