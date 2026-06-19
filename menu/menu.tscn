@@ -120,7 +120,6 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -83.0
 grow_horizontal = 2
 grow_vertical = 0
 color = Color(0.5294118, 0.3647059, 0.34509805, 1)
