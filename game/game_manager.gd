@@ -38,7 +38,7 @@ func _boredness_meter_process(item: Item) -> void:
 		if counts[prev_item] > highest:
 			highest = counts[prev_item]
 			most_common = prev_item
-	if highest >= 3:
+	if highest >= 3 and most_common == item:
 		print("robot is bored")
 		(robot_player as RobotPlayer).bored_particles()
 		boredness += 1
