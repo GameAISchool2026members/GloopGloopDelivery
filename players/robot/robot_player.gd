@@ -167,7 +167,10 @@ func _is_objective_valid_target(objective: Node2D) -> bool:
 func _on_player_interacted(item : Item) -> void:
 	var source = objectives_manager.get_source_objective_given_item(item)
 	var id = objectives_manager.get_id_given_objective(source)
+	if id < 0:
+		return
 	policy_predictor.train(id, human_player)
+	
 func _on_robot_interacted(item: Item) -> void:
 	history_items.append(item)
 	if history_items.size() > max_history_size:

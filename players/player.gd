@@ -42,7 +42,7 @@ func _interact() -> bool:
 		var furnace = ECS.get_component(touching, ProducerComponent) as ProducerComponent
 		var delivered = furnace.produce_item(item)
 		if delivered:	
-				item = null
+			item = null
 		return true
 	if ECS.has_component(touching, ProducerComponent) and not item:
 		var furnace = ECS.get_component(touching, ProducerComponent) as ProducerComponent
