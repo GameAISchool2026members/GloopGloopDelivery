@@ -5,9 +5,9 @@ signal pickup_objective(Entity: Node2D)
 
 @export var game_manager : GameManager
 @onready var interaction_area: Area2D = $InteractionArea
+
 var objectives_manager : ObjectivesManager
 var touching: Node2D
-var carrying :Node2D
 
 func _ready() -> void:
 	interaction_area.area_entered.connect(_on_interaction_area_entered)
@@ -16,17 +16,19 @@ func _ready() -> void:
 	speed = 200
 	
 func _process(delta):
+	# interactions
+	super(delta)
 	if Input.is_action_just_pressed("interact"):
 		print("interact")
 		if(touching != null):
 			var groups = touching.get_groups()
 			print("interacting with interactable")
-			print(groups)
-			carrying = touching.duplicate()
-			carrying.scale = Vector2(0.5,0.5)
-			carrying.position = Vector2(0,-5)
-			add_child(carrying)
+			if ECS.has_component(touching, ResourceComponent):
+				print("has it!")
+				item = ECS.get_component(touching, ResourceComponent).item
 			pickup_objective.emit(touching)
+			
+
 func get_input():
 	var input_direction = Input.get_vector("left", "right", "up", "down")
 	velocity = input_direction * speed
