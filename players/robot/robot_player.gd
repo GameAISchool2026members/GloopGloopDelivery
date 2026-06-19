@@ -13,7 +13,7 @@ var state : State = State.IDLE
 var target_node : Node2D
 
 var history_items: Array = []
-var max_history_size: int = 8
+var max_history_size: int = 6
 var evil: bool = false
 
 func _ready() -> void:
@@ -166,6 +166,9 @@ func _emote(node: Node2D):
 
 func bored_particles():
 	$Particles.emitting = true
+	
+func happy_particles():
+	$HappyParticles.emitting = true
 
 func _is_objective_valid_target(objective: Node2D) -> bool:
 	return true
