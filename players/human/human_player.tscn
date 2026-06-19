@@ -3,6 +3,28 @@
 [ext_resource type="Script" uid="uid://dc8r7nh06fld6" path="res://players/human/human_player.gd" id="1_onrkg"]
 [ext_resource type="Texture2D" uid="uid://kw5302i5rm6m" path="res://players/human/human.png" id="2_a70vh"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_a70vh"]
+atlas = ExtResource("2_a70vh")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5vri4"]
+atlas = ExtResource("2_a70vh")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hq52f"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a70vh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5vri4")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_onrkg"]
 radius = 6.0
 
@@ -13,8 +35,9 @@ radius = 15.0
 collision_layer = 2
 script = ExtResource("1_onrkg")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=570997104]
-texture = ExtResource("2_a70vh")
+[node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=1152814758]
+sprite_frames = SubResource("SpriteFrames_hq52f")
+autoplay = "default"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1796559021]
 shape = SubResource("CircleShape2D_onrkg")
