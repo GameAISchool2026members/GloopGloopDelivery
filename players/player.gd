@@ -47,7 +47,8 @@ func _interact() -> bool:
 	if ECS.has_component(touching, ProducerComponent) and not item:
 		var furnace = ECS.get_component(touching, ProducerComponent) as ProducerComponent
 		item = furnace.pickup()
-		pickup_objective.emit(item)
+		if item:
+			pickup_objective.emit(item)
 		return true
 		#pickup_objective.emit(touching)
 	return false
