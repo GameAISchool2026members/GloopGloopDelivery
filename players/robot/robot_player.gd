@@ -24,7 +24,6 @@ func _ready() -> void:
 	objectives_manager = game_manager.objectives_manager
 	policy_predictor.init(objectives_manager.get_number_of_objectives(), human_player)
 	
-	print("TODO: CONNEC TPLAYER TOUCHING TO _on_player_interacted")
 	human_player.pickup_objective.connect(_on_player_interacted)
 	_move_to_global_pos(human_player.global_position)
 	
@@ -89,16 +88,17 @@ func find_target() -> void:
 		
 	await get_tree().create_timer(4.0).timeout
 	
-	find_target()
+	#find_target()
 
 func _is_objective_valid_target(objective: Node2D) -> bool:
+	return true
+	# TODO: CHECK IF WE NEED RESOURCE OR IF RESOURCE IS READY (e.g. FURNACE)
 	if objective.has_method("is_available") and not objective.is_available():
 		return false
 	return true
 	
-func _on_player_interacted(node : Node2D) -> void:
-	print("hi!!")
-	return
-	var id = objectives_manager.object_to_id()
+func _on_player_interacted(item : Item) -> void:
+	var source = objectives_manager.get_source_objective_given_item(item)
+	var id = objectives_manager.get_id_given_objective(source)
 	policy_predictor.train(id, human_player)
 	

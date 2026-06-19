@@ -16,8 +16,9 @@ func init(num_objectves : int, player: HumanPlayer) -> void:
 	print("init mlp: ", num_objectves)
 	mlp.build_structure([6, 16, num_objectves], [mlp.Activation.TANH, mlp.Activation.SOFTMAX])
 	_reset_history_buffer(player)
-	mlp.print_structure()
+	#mlp.print_structure()
 	initialized = true
+	_update_history_buffer(player)
 
 func _reset_history_buffer(player: HumanPlayer) -> void:
 	history_buffer.clear()
@@ -25,9 +26,14 @@ func _reset_history_buffer(player: HumanPlayer) -> void:
 		history_buffer.append(player.get_default_intent_vector())
 
 func _update_history_buffer(player: HumanPlayer) -> void:
+	if player == null: 
+		return
 	# collect user data to add to history buffer
 	history_buffer.pop_back()
 	history_buffer.push_front(player.get_current_intent_vector())
+	
+	await get_tree().create_timer(history_interval).timeout
+	_update_history_buffer(player)
 
 func train(found_objective_index : int, player: HumanPlayer) -> void:
 	if not initialized or objectives_count <= 0:
