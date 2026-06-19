@@ -15,7 +15,6 @@
 
 [sub_resource type="LabelSettings" id="LabelSettings_vasa2"]
 font = ExtResource("1_l1rk1")
-font_size = 36
 shadow_size = 2
 shadow_color = Color(0, 0, 0, 1)
 shadow_offset = Vector2(5, 5)
@@ -54,17 +53,21 @@ text = "100"
 label_settings = SubResource("LabelSettings_vasa2")
 horizontal_alignment = 1
 
-[node name="ScoreTable" type="Label" parent="CanvasLayer/GUI" unique_id=1606029131]
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/GUI" unique_id=1573386033]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.082
-offset_left = 141.0
-offset_top = 13.0
-offset_right = 567.0
-offset_bottom = 187.95999
-grow_horizontal = 2
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -181.0
+offset_top = -92.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="ScoreTable" type="Label" parent="CanvasLayer/GUI/PanelContainer" unique_id=1606029131]
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
 label_settings = SubResource("LabelSettings_vasa2")
 horizontal_alignment = 2
 

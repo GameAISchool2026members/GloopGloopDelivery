@@ -2,7 +2,7 @@ class_name GameGUI extends Control
 
 @onready var timer_label : Label = $Timer
 @onready var score_label : Label = $Score
-@onready var score_table : Label = $ScoreTable
+@onready var score_table : Label = $PanelContainer/ScoreTable
 
 func set_timer_value(value: float) -> void:
 	timer_label.text = str(int(value))
