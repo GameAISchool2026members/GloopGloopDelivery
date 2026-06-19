@@ -15,7 +15,7 @@ radial_velocity_max = 4.9999776
 scale_min = 2.0
 scale_max = 3.0
 
-[node name="Furnace" type="Node2D" unique_id=521397584]
+[node name="Furnace" type="Node2D" unique_id=521397584 groups=["interactable"]]
 script = ExtResource("1_qcspv")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1527274717]

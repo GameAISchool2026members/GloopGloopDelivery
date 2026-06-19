@@ -1,6 +1,7 @@
 class_name ObjectivesManager extends Node2D
 
 var objectives : Array[Node2D]
+var game_manager : GameManager
 
 
 func find_all_objectes() -> void:
@@ -24,20 +25,72 @@ func get_source_objective_given_item(item: Item) -> Node2D:
 			if rc.item == item:
 				return o
 	return null
-
-func get_target_objective_given_item(item: Item) -> Node2D:
-	print("TODO: fix inventory objecive")
-	var collector : Node2D
+func get_all_target_objectives() -> Array[Dictionary]:
+	var result : Array[Dictionary]
+	var i : int = 0
+	for o in objectives:
+		if ECS.has_component(o, ProducerComponent):
+			var pc = ECS.get_component(o, ProducerComponent) as ProducerComponent
+			var item = pc.peak_item()
+			if item:
+				var score = game_manager.score_table[item]
+				result.append({
+					"node" : o,
+					"index" : i,
+					"result_score" : score,
+					"prediction_score" : 0
+				})
+		if ECS.has_component(o, ResourceComponent):
+			var rc = ECS.get_component(o, ResourceComponent) as ResourceComponent
+			var item = rc.item
+			if item:
+				var score = game_manager.score_table[item]
+				result.append({
+					"node" : o,
+					"index" : i,
+					"result_score" : score,
+					"prediction_score" : 0
+				})
+		i += 1
+	return result
+	
+func get_all_target_objectives_given_item(item: Item) -> Array[Dictionary]:
+	var result : Array[Dictionary]
+	var i : int = 0
 	for o in objectives:
 		if ECS.has_component(o, ProducerComponent):
 			var pc = ECS.get_component(o, ProducerComponent) as ProducerComponent
 			for r : Recipe in pc.recipes:
 				if r.input == item:
-					return o
+					var score = game_manager.score_table[r.output]
+					result.append({
+						"node" : o,
+						"index" : i,
+						"result_score" : score,
+						"prediction_score" : 0
+					})
 		if ECS.has_component(o, InventoryComponent):
-			collector = o
-			
-	return collector
+			var score = game_manager.score_table[item]
+			result.append({
+				"node" : o,
+				"index" : i,
+				"result_score" : score,
+				"prediction_score" : 0
+			})
+		i += 1
+	return result
+	
+#func get_target_objective_given_item(item: Item) -> Node2D:
+	#var collector : Node2D
+	#for o in objectives:
+		#if ECS.has_component(o, ProducerComponent):
+			#var pc = ECS.get_component(o, ProducerComponent) as ProducerComponent
+			#for r : Recipe in pc.recipes:
+				#if r.input == item:
+					#return o
+		#if ECS.has_component(o, InventoryComponent):
+			#collector = o			
+	#return collector
 
 func get_id_given_objective(objective : Node2D) -> int:
 	var i : int = 0

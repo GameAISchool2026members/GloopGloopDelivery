@@ -10,8 +10,9 @@ var path: PackedVector2Array = []
 
 enum State { IDLE, WALKING_TO_ITEM, WALKING_WITH_ITEM, WAITING }
 var state : State = State.IDLE
-#store target
-#if no target -> use policy predictor
+var target_node : Node2D
+
+
 
 func _ready() -> void:
 	if game_manager == null:
@@ -31,12 +32,19 @@ func _ready() -> void:
 func _process(delta):
 	super(delta)
 	
+	if target_node == null:
+		state = State.IDLE
+	
+	if target_node != null and state == State.IDLE:
+		state = State.WALKING_TO_ITEM
+	
 	if item != null and state == State.WALKING_TO_ITEM:
-		var target = objectives_manager.get_target_objective_given_item(item)
-		if target == null:
-			return
+		#var target = objectives_manager.get_target_objective_given_item(item)
+		#if target == null:
+			#return
 		state = State.WALKING_WITH_ITEM
-		_move_to_global_pos(target.global_position)
+		#_move_to_global_pos(target.global_position)
+		find_target()
 	
 	if item == null and state == State.WALKING_WITH_ITEM:
 		state = State.IDLE
@@ -71,45 +79,41 @@ func _move_to_global_pos(global_target_pos: Vector2):
 	path = terrain.astar.get_point_path(this_local, target_local)
 	path_index = 0
 	
+func get_current_objectives() -> Array[Dictionary]:
+	if item:
+		return objectives_manager.get_all_target_objectives_given_item(item)
+	
+	return objectives_manager.get_all_target_objectives()
+
 func find_target() -> void:
 	print("finding target")
 	var prediction_probs := policy_predictor.predict(human_player)
 	if prediction_probs.is_empty():
 		return
 
-	var sorted_indices: Array[int] = []
-	for i in range(prediction_probs.size()):
-		sorted_indices.append(i)
+	target_node = null
+	var objectives : Array[Dictionary] = get_current_objectives()
+	for i in range(objectives.size()):
+		objectives[i].prediction_score = prediction_probs[objectives[i].index]
 	
-	sorted_indices.sort_custom(func(a, b): return prediction_probs[a] < prediction_probs[b])
+	objectives.sort_custom(func(a, b): return a.prediction_score < b.prediction_score)
 	
-	var target_position : Vector2
-	var target_found := false
-	var objectives = objectives_manager.get_all_objectives()
-	for idx in sorted_indices:
-		if idx >= objectives.size():
-			continue
-			
-		var potential_objective = objectives[idx]
+	for o in objectives:
+		var potential_objective_node = o.node
+		var potential_objective_index = o.index
+		var potential_objective_score = o.result_score
+		var potential_objective_prediction_score = o.prediction_score
 		
-		if ECS.has_component(potential_objective, InventoryComponent):
-			continue
-		if ECS.has_component(potential_objective, ProducerComponent):
-			continue
-		
-		target_position = potential_objective.global_position
-		target_found = true
-		
+		target_node = potential_objective_node
 		print("Robot targeted: %s | Probability: %.1f%%" % [
-			potential_objective.name, 
-			prediction_probs[idx] * 100.0
+			potential_objective_node.name, 
+			potential_objective_prediction_score * 100.0
 		])			
-		_emote(potential_objective)
-		_move_to_global_pos(target_position)
-		state = State.WALKING_TO_ITEM
+		_emote(potential_objective_node)
+		_move_to_global_pos(target_node.global_position)
 		break
 			
-	if not target_found:
+	if not target_node:
 		print("All neglected objectives are currently invalid or unreachable.")
 	
 func _emote(node: Node2D):
@@ -132,7 +136,9 @@ func _on_player_interacted(item : Item) -> void:
 func _on_interaction_area_entered(area: Area2D) -> void:
 	print(area.get_groups())
 	touching = area.get_parent()
-	_interact()
+	if touching == target_node:
+		if _interact():
+			target_node = null
 		
 func _on_interaction_area_exited(body: Area2D) -> void:
 	touching = null
