@@ -2,7 +2,7 @@ class_name GameManager extends Node2D
 
 @onready var gui : GameGUI = $"../CanvasLayer/GUI"
 
-@export var game_length :float = 100
+@export var game_length :float = 150
 @export var score_table: Dictionary[Item, float]
 @export var human_player : Player
 @export var robot_player : Player

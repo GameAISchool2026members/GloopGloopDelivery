@@ -93,7 +93,8 @@ offset_left = -396.0
 offset_right = 396.0
 offset_bottom = 59.0
 grow_horizontal = 2
-text = "100"
+text = "150
+"
 label_settings = SubResource("LabelSettings_vasa2")
 horizontal_alignment = 1
 

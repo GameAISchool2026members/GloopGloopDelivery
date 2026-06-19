@@ -8,6 +8,8 @@ On mars, aliens collect as much valuable resources as possible.
 They are helped by their super smart robots that learn from their behaviour.
 But now the robots are so smart they get bored by repetitive tasks. And bored robots don't behave like they should...
 
+## Controls
+To control the alien use wasd/arrow keys to interact with an object use e/spacebar
 ## Technical Description
 Gloop Gloop Delivery is a Godot 4.6.3 game.
 It is an experiment in collaborative AI. Your robot helper, Gloop Gloop, uses online learning to model
