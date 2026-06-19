@@ -20,6 +20,12 @@ shadow_size = 2
 shadow_color = Color(0, 0, 0, 1)
 shadow_offset = Vector2(5, 5)
 
+[sub_resource type="LabelSettings" id="LabelSettings_pbjm4"]
+font = ExtResource("1_j0t7f")
+shadow_size = 2
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(5, 5)
+
 [node name="Menu" type="Node2D" unique_id=5250221]
 script = ExtResource("1_6nwqt")
 
@@ -59,6 +65,24 @@ grow_horizontal = 2
 text = "Gloop Gloop Deliver"
 label_settings = SubResource("LabelSettings_jc4t8")
 horizontal_alignment = 1
+
+[node name="Title2" type="Label" parent="CanvasLayer/GUI" unique_id=779424683]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -550.0
+offset_top = 118.0
+offset_right = 554.0
+offset_bottom = 297.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 10
+text = "On mars, aliens collect as much valuable resources as possible.
+They are helped by their super smart robots that learn from their behaviour.
+But now the robots are so smart they get bored by repetitive tasks. And bored robots don't behave like they should..."
+label_settings = SubResource("LabelSettings_pbjm4")
+horizontal_alignment = 1
+autowrap_mode = 3
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/GUI" unique_id=97379704]
 layout_mode = 1
