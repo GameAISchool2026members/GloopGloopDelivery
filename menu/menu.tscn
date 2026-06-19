@@ -65,7 +65,7 @@ offset_top = 20.0
 offset_right = 396.0
 offset_bottom = 79.0
 grow_horizontal = 2
-text = "Gloop Gloop Deliver"
+text = "Gloop Gloop Delivery"
 label_settings = SubResource("LabelSettings_jc4t8")
 horizontal_alignment = 1
 
