@@ -26,6 +26,7 @@ func _signal_bus_item_collected(item: Item) -> void:
 	var points = round(score_table[item])
 	score += points
 func _boredness_meter_process(item: Item) -> void:
+	robot_player.add_to_history(item)
 	var robot_history = robot_player.history_items
 	var counts = {}
 	var most_common = null
