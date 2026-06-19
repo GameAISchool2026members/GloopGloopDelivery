@@ -12,6 +12,9 @@ enum State { IDLE, WALKING, WAITING }
 var state : State = State.IDLE
 var target_node : Node2D
 
+var history_items: Array = []
+var max_history_size: int = 10
+
 func _ready() -> void:
 	if game_manager == null:
 		print("uh oh")
@@ -21,7 +24,7 @@ func _ready() -> void:
 	interaction_area.area_entered.connect(_on_interaction_area_entered)
 	interaction_area.area_exited.connect(_on_interaction_area_exited)
 	objectives_manager = game_manager.objectives_manager
-	
+	pickup_objective.connect(_on_robot_interacted)
 	policy_predictor.init(objectives_manager.get_number_of_objectives(), human_player)
 	
 	human_player.pickup_objective.connect(_on_player_interacted)
@@ -128,8 +131,6 @@ func find_target() -> void:
 		print("All neglected objectives are currently invalid or unreachable.")
 	
 	state = State.WALKING
-
-
 func _softmax(raw_scores: PackedFloat32Array) -> PackedFloat32Array:
 	var result := PackedFloat32Array()
 	result.resize(raw_scores.size())
@@ -166,7 +167,10 @@ func _on_player_interacted(item : Item) -> void:
 	var source = objectives_manager.get_source_objective_given_item(item)
 	var id = objectives_manager.get_id_given_objective(source)
 	policy_predictor.train(id, human_player)
-	
+func _on_robot_interacted(item: Item) -> void:
+	history_items.append(item)
+	if history_items.size() > max_history_size:
+		history_items.pop_front()
 func _on_interaction_area_entered(area: Area2D) -> void:
 	print(area.get_groups())
 	touching = area.get_parent()

@@ -3,7 +3,7 @@ class_name GameGUI extends Control
 @onready var timer_label : Label = $Timer
 @onready var score_label : Label = $Score
 @onready var score_table : Label = $PanelContainer/ScoreTable
-@onready var bored_bar : Label = $ProgressBar
+@onready var bored_bar : ProgressBar = $ProgressBar
 func set_timer_value(value: float) -> void:
 	timer_label.text = str(int(value))
 	
