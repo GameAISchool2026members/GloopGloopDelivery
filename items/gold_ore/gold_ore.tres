@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://ow48chmijww0"]
+
+[ext_resource type="Script" uid="uid://b15niow2uxp3x" path="res://items/item.gd" id="1_ofgmv"]
+[ext_resource type="Texture2D" uid="uid://d22mwy3mcvvf6" path="res://items/gold_ore/gold_ore.png" id="2_c0kmx"]
+
+[resource]
+script = ExtResource("1_ofgmv")
+name = "Gold Ore"
+texture = ExtResource("2_c0kmx")
+metadata/_custom_type_script = "uid://b15niow2uxp3x"

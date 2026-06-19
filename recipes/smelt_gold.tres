@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Recipe" format=3 uid="uid://dh3ye5y7fa0n0"]
+
+[ext_resource type="Script" uid="uid://b7fmof07uo73v" path="res://recipes/recipe.gd" id="1_0djyf"]
+[ext_resource type="Resource" uid="uid://ow48chmijww0" path="res://items/gold_ore/gold_ore.tres" id="1_sjsha"]
+[ext_resource type="Resource" uid="uid://dxt8iedfy4cje" path="res://items/gold_bar/gold_bar.tres" id="2_3yjtf"]
+
+[resource]
+script = ExtResource("1_0djyf")
+input = ExtResource("1_sjsha")
+output = ExtResource("2_3yjtf")
+metadata/_custom_type_script = "uid://b7fmof07uo73v"

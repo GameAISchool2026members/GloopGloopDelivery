@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://dn7bmat6r683b"]
+
+[ext_resource type="Script" uid="uid://b15niow2uxp3x" path="res://items/item.gd" id="1_rj83n"]
+[ext_resource type="Texture2D" uid="uid://cou4f4vm2vryj" path="res://items/iron_bar/iron_bar.png" id="2_nkm5x"]
+
+[resource]
+script = ExtResource("1_rj83n")
+name = "Iron Bar"
+texture = ExtResource("2_nkm5x")
+metadata/_custom_type_script = "uid://b15niow2uxp3x"
