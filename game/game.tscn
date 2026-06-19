@@ -10,8 +10,8 @@
 [ext_resource type="Resource" uid="uid://ow48chmijww0" path="res://items/gold_ore/gold_ore.tres" id="6_b686c"]
 [ext_resource type="PackedScene" uid="uid://ckudr8chj1kgo" path="res://players/human/human_player.tscn" id="6_dakft"]
 [ext_resource type="PackedScene" uid="uid://b8b8erpuqqxvy" path="res://players/robot/robot_player.tscn" id="6_u5opy"]
-[ext_resource type="Texture2D" uid="uid://cou4f4vm2vryj" path="res://items/iron_bar/iron_bar.png" id="7_hb504"]
 [ext_resource type="Resource" uid="uid://dxt8iedfy4cje" path="res://items/gold_bar/gold_bar.tres" id="8_ee6o4"]
+[ext_resource type="Resource" uid="uid://dn7bmat6r683b" path="res://items/iron_bar/iron_bar.tres" id="8_qf6n1"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_vasa2"]
 font = ExtResource("1_l1rk1")
@@ -19,11 +19,6 @@ font_size = 36
 shadow_size = 2
 shadow_color = Color(0, 0, 0, 1)
 shadow_offset = Vector2(5, 5)
-
-[sub_resource type="Resource" id="Resource_4cobl"]
-script = ExtResource("4_qf6n1")
-texture = ExtResource("7_hb504")
-metadata/_custom_type_script = "uid://b15niow2uxp3x"
 
 [node name="Game" type="Node2D" unique_id=1353891694]
 
@@ -78,8 +73,9 @@ script = ExtResource("1_vasa2")
 score_table = Dictionary[ExtResource("4_qf6n1"), int]({
 ExtResource("5_vsp63"): 1,
 ExtResource("6_b686c"): 2,
-SubResource("Resource_4cobl"): 5,
-ExtResource("8_ee6o4"): 10
+ExtResource("8_ee6o4"): 10,
+null: 0,
+ExtResource("8_qf6n1"): 5
 })
 human_player = NodePath("../Players/HumanPlayer")
 robot_player = NodePath("../Players/RobotPlayer")
