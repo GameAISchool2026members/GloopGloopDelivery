@@ -15,6 +15,7 @@
 
 [sub_resource type="LabelSettings" id="LabelSettings_vasa2"]
 font = ExtResource("1_l1rk1")
+font_size = 36
 shadow_size = 2
 shadow_color = Color(0, 0, 0, 1)
 shadow_offset = Vector2(5, 5)
@@ -70,6 +71,13 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 8
 label_settings = SubResource("LabelSettings_vasa2")
 horizontal_alignment = 2
+
+[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer/GUI" unique_id=1254479555]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 635.0
+offset_right = 222.0
+offset_bottom = 695.0
 
 [node name="GameManager" type="Node2D" parent="." unique_id=385739205 node_paths=PackedStringArray("human_player", "robot_player", "terrain", "objectives_manager")]
 script = ExtResource("1_vasa2")
