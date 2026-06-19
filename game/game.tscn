@@ -74,7 +74,6 @@ score_table = Dictionary[ExtResource("4_qf6n1"), int]({
 ExtResource("5_vsp63"): 1,
 ExtResource("6_b686c"): 2,
 ExtResource("8_ee6o4"): 10,
-null: 0,
 ExtResource("8_qf6n1"): 5
 })
 human_player = NodePath("../Players/HumanPlayer")
