@@ -82,7 +82,9 @@ grow_horizontal = 2
 theme_override_font_sizes/font_size = 10
 text = "On mars, aliens collect as much valuable resources as possible.
 They are helped by their super smart robots that learn from their behaviour.
-But now the robots are so smart they get bored by repetitive tasks. And bored robots don't behave like they should..."
+But now the robots are so smart they get bored by repetitive tasks. And bored robots don't behave like they should...
+
+To control the alien use wasd/arrow keys to interact with an object use e/spacebar"
 label_settings = SubResource("LabelSettings_pbjm4")
 horizontal_alignment = 1
 autowrap_mode = 3

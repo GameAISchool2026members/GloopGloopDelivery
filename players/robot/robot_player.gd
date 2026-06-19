@@ -27,7 +27,7 @@ func _ready() -> void:
 	interaction_area.area_entered.connect(_on_interaction_area_entered)
 	interaction_area.area_exited.connect(_on_interaction_area_exited)
 	objectives_manager = game_manager.objectives_manager
-	pickup_objective.connect(_on_robot_interacted)
+	#pickup_objective.connect(_on_robot_interacted)
 	policy_predictor.init(objectives_manager.get_number_of_objectives(), human_player)
 	
 	human_player.pickup_objective.connect(_on_player_interacted)
@@ -199,7 +199,7 @@ func _on_player_interacted(item : Item) -> void:
 		return
 	policy_predictor.train(id, human_player)
 	
-func _on_robot_interacted(item: Item) -> void:
+func add_to_history(item: Item) -> void:
 	history_items.append(item)
 	if history_items.size() > max_history_size:
 		history_items.pop_front()

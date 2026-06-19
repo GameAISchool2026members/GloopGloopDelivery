@@ -1,29 +1,16 @@
-- Ai that collaborates
-- emotes & communicatie
-- online learning
-- evil & ally
-- beetje PCG omgeving
-- communication needs to be clear
+# Gloop Gloop Delivery 
+[Playable link](https://gameaischool2026members.github.io/GloopGloopDelivery/GameJamAI.html)
 
-# MVP
-- twee grondstoffen ijzer goud
-- 1 verwerker oven
-- player character
-	- player controller movement & interaction
-- blauwe bot
-- collectiepunt vraag aanbod
-- ML voor policy; scripts voor actions
-- PCG muurtjes grondstoffen
-- static camera
-- kamer in hele scherm
+On mars, aliens collect as much valuable resources as possible.
+They are helped by their super smart robots that learn from their behaviour.
+But now the robots are so smart they get bored by repetitive tasks. And bored robots don't behave like they should...
 
-# MVP+
-- emotes & communicatie
-- na refactor:
-- emote voor furnace en crate
-- idle animations
-- bored meter vanwege niet genoeg diversiteit in de targets van de robot
-- bored particle (bliksem)
+## Technical Description
+Gloop Gloop Delivery is a Godot 4.6.3 game.
+It is an experiment in collaborative AI. Your robot helper, Gloop Gloop, uses online learning to model
+what the player likes to do. It then tries to complement you, and do the tasks you don't do.
 
+However, it keeps track of its action history. If it has done the same action too often,
+it will get bored and become evil. The evil robot will bother you by performing the exact same
+actions as you, collapsing the economy in the progress.
 
-- 
