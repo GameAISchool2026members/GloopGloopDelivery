@@ -13,7 +13,7 @@ var state : State = State.IDLE
 var target_node : Node2D
 
 var history_items: Array = []
-var max_history_size: int = 8
+var max_history_size: int = 6
 var evil: bool = false
 
 func _ready() -> void:
@@ -73,7 +73,6 @@ func get_current_objectives() -> Array[Dictionary]:
 	
 	return objectives_manager.get_all_target_objectives()
 
-# Hyperparameter weights to control the robot's priorities
 @export var policy_weight: float = 1.0  # How much the AI's prediction matters
 @export var result_weight: float = 0.5  # How much the built-in game score matters
 
@@ -92,7 +91,10 @@ func find_target() -> void:
 	var raw_result_scores := PackedFloat32Array()
 	
 	for o in objectives:
-		raw_neglect_scores.append(-prediction_probs[o.index])
+		if evil:
+			raw_neglect_scores.append(prediction_probs[o.index])
+		else:
+			raw_neglect_scores.append(-prediction_probs[o.index])
 		raw_result_scores.append(o.result_score)
 		
 	var neglect_distribution := _softmax(raw_neglect_scores)
@@ -103,6 +105,7 @@ func find_target() -> void:
 	
 	for i in range(objectives.size()):
 		var mixed_score = (neglect_distribution[i] * policy_weight) + (result_distribution[i] * result_weight)
+		mixed_score = pow(mixed_score, 4.0)
 		combined_probs.append(mixed_score)
 		total_distribution_sum += mixed_score
 		
@@ -166,6 +169,9 @@ func _emote(node: Node2D):
 
 func bored_particles():
 	$Particles.emitting = true
+	
+func happy_particles():
+	$HappyParticles.emitting = true
 
 func _is_objective_valid_target(objective: Node2D) -> bool:
 	return true
@@ -185,6 +191,7 @@ func _on_robot_interacted(item: Item) -> void:
 	history_items.append(item)
 	if history_items.size() > max_history_size:
 		history_items.pop_front()
+
 func _on_interaction_area_entered(area: Area2D) -> void:
 	print(area.get_groups())
 	touching = area.get_parent()
