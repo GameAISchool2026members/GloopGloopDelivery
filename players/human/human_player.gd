@@ -59,7 +59,7 @@ func get_default_intent_vector() -> PackedFloat32Array:
 		result.append(0)
 		result.append(0)
 		result.append(1.0)
-	return []
+	return result
 
 # list of inputs for the policy, for each objective:
 # distance to player
@@ -72,4 +72,4 @@ func get_current_intent_vector() -> PackedFloat32Array:
 		result.append(o.global_position.distance_to(global_position))
 		result.append(dir.dot(velocity))
 		result.append(1.0)
-	return []
+	return result
