@@ -45,6 +45,13 @@ func add_layer(n_in: int, n_out: int, activation: Activation) -> void:
 
 # Performs a forward pass and returns an array of all layer activations (including input)
 func _forward_pass(inputs: PackedFloat32Array) -> Array[PackedFloat32Array]:
+	if inputs.is_empty():
+		push_error("GodotMLP Error: '_forward_pass' received an empty inputs array!")
+		var fallback_inputs := PackedFloat32Array()
+		fallback_inputs.resize(layers[0].n_in if not layers.is_empty() else 1)
+		fallback_inputs.fill(0.0)
+		return [fallback_inputs]
+	
 	var a_cache: Array[PackedFloat32Array] = [inputs]
 	var current_a = inputs
 	
@@ -166,6 +173,48 @@ func _get_derivative(a: float, act: Activation) -> float:
 		Activation.LINEAR: return 1.0
 	return 1.0
 
+### DEBUG
+func print_structure() -> void:
+	_mutex.lock()
+	print("\n================== GodotMLP Structure ==================")
+	if layers.is_empty():
+		print("The network is empty. Call build_structure() first.")
+		print("========================================================")
+		_mutex.unlock()
+		return
+
+	print("Learning Rate: %f" % learning_rate)
+	print("Loss Function: %s" % ("MSE" if loss_function == LossFunction.MSE else "CROSS_ENTROPY"))
+	print("--------------------------------------------------------")
+
+	var activation_names := ["RELU", "SIGMOID", "TANH", "LINEAR", "SOFTMAX"]
+	var structural_error := false
+	
+	# Display input features based on the first layer's configurations
+	print("Input Layer      | Nodes: %d" % layers[0].n_in)
+	
+	for i in range(layers.size()):
+		var layer := layers[i]
+		var act_str: String = activation_names[layer.activation] if layer.activation < activation_names.size() else "UNKNOWN"
+		
+		# Distinguish between internal hidden nodes and the ultimate target projection
+		var layer_type := "Output Layer     " if i == layers.size() - 1 else "Hidden Layer %-3d " % (i + 1)
+		print("%s| Nodes: %-4d | Activation: %s" % [layer_type, layer.n_out, act_str])
+		
+		# Validation Check: Ensure output size matches the input size of the following layer
+		if i < layers.size() - 1:
+			var next_layer := layers[i + 1]
+			if layer.n_out != next_layer.n_in:
+				print(" [!] SHAPE MISMATCH ERROR: Layer %d outputs %d, but Layer %d expects %d!" % [i + 1, layer.n_out, i + 2, next_layer.n_in])
+				structural_error = true
+
+	print("--------------------------------------------------------")
+	if structural_error:
+		print("Verification: FAILED (Layer matrix sizes are incompatible)")
+	else:
+		print("Verification: PASSED (All connections are valid)")
+	print("========================================================\n")
+	_mutex.unlock()
 
 ### API
 func build_structure(sizes: Array[int], activations: Array[Activation]) -> void:

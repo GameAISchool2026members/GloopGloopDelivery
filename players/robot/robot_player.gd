@@ -25,6 +25,7 @@ func _ready() -> void:
 	policy_predictor.init(objectives_manager.get_number_of_objectives(), human_player)
 	
 	print("TODO: CONNEC TPLAYER TOUCHING TO _on_player_interacted")
+	human_player.pickup_objective.connect(_on_player_interacted)
 	_move_to_global_pos(human_player.global_position)
 	
 	find_target()
@@ -71,7 +72,7 @@ func find_target() -> void:
 			
 		var potential_objective = policy_predictor.active_objectives[idx]
 		
-		if _is_objective_valid_target(potential_objective):
+		if  (potential_objective):
 			target_position = potential_objective.global_position
 			target_found = true
 			
@@ -96,6 +97,8 @@ func _is_objective_valid_target(objective: Node2D) -> bool:
 	return true
 	
 func _on_player_interacted(node : Node2D) -> void:
+	print("hi!!")
+	return
 	var id = objectives_manager.object_to_id()
 	policy_predictor.train(id, human_player)
 	
