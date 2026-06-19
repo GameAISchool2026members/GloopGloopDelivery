@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://ctek3ueshgrhr" path="res://game/gui.gd" id="2_4fuuu"]
 [ext_resource type="Script" uid="uid://bydlo2gs47d03" path="res://game/objectives_manager.gd" id="2_dxrkv"]
 [ext_resource type="Shader" uid="uid://cttod264npo7d" path="res://game/environment/world_shader.gdshader" id="3_vsp63"]
+[ext_resource type="Texture2D" uid="uid://f8hd465vb1kv" path="res://players/robot/frown.png" id="4_b686c"]
 [ext_resource type="Script" uid="uid://b15niow2uxp3x" path="res://items/item.gd" id="4_qf6n1"]
 [ext_resource type="PackedScene" uid="uid://dxv44t1na7jg0" path="res://terrain/terrain.tscn" id="5_u5opy"]
 [ext_resource type="Resource" uid="uid://byf1vmw0qh5t2" path="res://items/iron_ore/iron_ore.tres" id="5_vsp63"]
@@ -32,6 +33,12 @@ font = ExtResource("1_l1rk1")
 shadow_size = 2
 shadow_color = Color(0, 0, 0, 1)
 shadow_offset = Vector2(5, 5)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hb504"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ee6o4"]
+bg_color = Color(1, 0, 0.18431373, 1)
 
 [node name="Game" type="Node2D" unique_id=1353891694]
 
@@ -97,18 +104,30 @@ horizontal_alignment = 2
 [node name="ProgressBar" type="ProgressBar" parent="CanvasLayer/GUI" unique_id=1254479555]
 layout_mode = 0
 offset_left = 19.0
-offset_top = 635.0
+offset_top = 662.0
 offset_right = 222.0
 offset_bottom = 695.0
+theme_override_styles/background = SubResource("StyleBoxFlat_hb504")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ee6o4")
+max_value = 5.0
+value = 3.0
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/GUI" unique_id=2001953581]
+layout_mode = 0
+offset_left = 230.0
+offset_top = 656.0
+offset_right = 270.0
+offset_bottom = 696.0
+texture = ExtResource("4_b686c")
 
 [node name="GameManager" type="Node2D" parent="." unique_id=385739205 node_paths=PackedStringArray("human_player", "robot_player", "terrain", "objectives_manager")]
 script = ExtResource("1_vasa2")
 game_length = null
-score_table = Dictionary[ExtResource("4_qf6n1"), int]({
-ExtResource("5_vsp63"): 1,
-ExtResource("6_b686c"): 2,
-ExtResource("8_ee6o4"): 10,
-ExtResource("8_qf6n1"): 5
+score_table = Dictionary[ExtResource("4_qf6n1"), float]({
+ExtResource("5_vsp63"): 1.0,
+ExtResource("6_b686c"): 2.0,
+ExtResource("8_ee6o4"): 10.0,
+ExtResource("8_qf6n1"): 5.0
 })
 human_player = NodePath("../Players/HumanPlayer")
 robot_player = NodePath("../Players/RobotPlayer")

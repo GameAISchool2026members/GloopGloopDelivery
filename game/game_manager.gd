@@ -40,6 +40,7 @@ func _boredness_meter_process(item: Item) -> void:
 			most_common = prev_item
 	if highest > 2:
 		print("robot is bored")
+		(robot_player as RobotPlayer).bored_particles()
 		boredness +=1
 func _enter_tree() -> void:
 	terrain.generate()

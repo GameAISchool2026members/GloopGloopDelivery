@@ -157,6 +157,9 @@ func _emote(node: Node2D):
 	if sprite:
 		$Panel/PanelContainer/TextureRect.texture = sprite.texture
 
+func bored_particles():
+	$Particles.emitting = true
+
 func _is_objective_valid_target(objective: Node2D) -> bool:
 	return true
 	# TODO: CHECK IF WE NEED RESOURCE OR IF RESOURCE IS READY (e.g. FURNACE)
