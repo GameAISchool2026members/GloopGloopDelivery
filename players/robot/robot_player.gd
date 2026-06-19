@@ -157,13 +157,6 @@ func _emote(node: Node2D):
 	if sprite:
 		$Panel/PanelContainer/TextureRect.texture = sprite.texture
 
-func _is_objective_valid_target(objective: Node2D) -> bool:
-	return true
-	# TODO: CHECK IF WE NEED RESOURCE OR IF RESOURCE IS READY (e.g. FURNACE)
-	if objective.has_method("is_available") and not objective.is_available():
-		return false
-	return true
-	
 func _on_player_interacted(item : Item) -> void:
 	var source = objectives_manager.get_source_objective_given_item(item)
 	var id = objectives_manager.get_id_given_objective(source)

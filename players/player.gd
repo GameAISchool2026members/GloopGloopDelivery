@@ -21,6 +21,10 @@ func _process(delta):
 		item_sprite.texture = item.texture
 	else:
 		item_sprite.texture = null
+		
+	if game_manager.state == GameManager.State.END:
+		speed = 0
+		
 	
 func _interact() -> bool:
 	if(touching == null):
