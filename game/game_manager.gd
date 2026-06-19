@@ -3,7 +3,7 @@ class_name GameManager extends Node2D
 @onready var gui : GameGUI = $"../CanvasLayer/GUI"
 
 @export var game_length :float = 100
-@export var score_table: Dictionary[Item, int]
+@export var score_table: Dictionary[Item, float]
 @export var human_player : Player
 @export var robot_player : Player
 @export var terrain : Terrain
@@ -20,10 +20,10 @@ func _signal_bus_item_collected(item: Item) -> void:
 	print("score!")
 	for item_score in score_table:
 		if item==item_score:
-			score_table[item_score] -= 1
+			score_table[item_score] -= 0.2
 		else:
-			score_table[item_score] += 1
-	var points = score_table[item]
+			score_table[item_score] += 0.2
+	var points = round(score_table[item])
 	score += points
 func _boredness_meter_process(item: Item) -> void:
 	var robot_history = robot_player.history_items

@@ -103,6 +103,7 @@ offset_bottom = 695.0
 
 [node name="GameManager" type="Node2D" parent="." unique_id=385739205 node_paths=PackedStringArray("human_player", "robot_player", "terrain", "objectives_manager")]
 script = ExtResource("1_vasa2")
+game_length = null
 score_table = Dictionary[ExtResource("4_qf6n1"), int]({
 ExtResource("5_vsp63"): 1,
 ExtResource("6_b686c"): 2,
