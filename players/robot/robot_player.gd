@@ -8,11 +8,9 @@ var terrain : Terrain
 var path_index: int = 0
 var path: PackedVector2Array = []
 
-enum State { IDLE, WALKING_TO_ITEM, WALKING_WITH_ITEM, WAITING }
+enum State { IDLE, WALKING, WAITING }
 var state : State = State.IDLE
 var target_node : Node2D
-
-
 
 func _ready() -> void:
 	if game_manager == null:
@@ -32,30 +30,10 @@ func _ready() -> void:
 func _process(delta):
 	super(delta)
 	
-	if target_node == null:
-		state = State.IDLE
-	
-	if target_node != null and state == State.IDLE:
-		state = State.WALKING_TO_ITEM
-	
-	if item != null and state == State.WALKING_TO_ITEM:
-		#var target = objectives_manager.get_target_objective_given_item(item)
-		#if target == null:
-			#return
-		state = State.WALKING_WITH_ITEM
-		#_move_to_global_pos(target.global_position)
-		find_target()
-	
-	if item == null and state == State.WALKING_WITH_ITEM:
-		state = State.IDLE
-	
 	match state:
 		State.IDLE:
-			find_target()
-		State.WALKING_TO_ITEM:
-			pass
-		State.WALKING_WITH_ITEM:
-			pass
+			if target_node == null:
+				find_target()
 		
 
 func _physics_process(delta):
@@ -85,6 +63,10 @@ func get_current_objectives() -> Array[Dictionary]:
 	
 	return objectives_manager.get_all_target_objectives()
 
+# Hyperparameter weights to control the robot's priorities
+@export var policy_weight: float = 1.0  # How much the AI's prediction matters
+@export var result_weight: float = 0.5  # How much the built-in game score matters
+
 func find_target() -> void:
 	print("finding target")
 	var prediction_probs := policy_predictor.predict(human_player)
@@ -92,29 +74,81 @@ func find_target() -> void:
 		return
 
 	target_node = null
-	var objectives : Array[Dictionary] = get_current_objectives()
-	for i in range(objectives.size()):
-		objectives[i].prediction_score = prediction_probs[objectives[i].index]
-	
-	objectives.sort_custom(func(a, b): return a.prediction_score < b.prediction_score)
+	var objectives: Array[Dictionary] = get_current_objectives()
+	if objectives.is_empty():
+		return
+			
+	var raw_neglect_scores := PackedFloat32Array()
+	var raw_result_scores := PackedFloat32Array()
 	
 	for o in objectives:
-		var potential_objective_node = o.node
-		var potential_objective_index = o.index
-		var potential_objective_score = o.result_score
-		var potential_objective_prediction_score = o.prediction_score
+		raw_neglect_scores.append(-prediction_probs[o.index])
+		raw_result_scores.append(o.result_score)
 		
-		target_node = potential_objective_node
-		print("Robot targeted: %s | Probability: %.1f%%" % [
-			potential_objective_node.name, 
-			potential_objective_prediction_score * 100.0
-		])			
-		_emote(potential_objective_node)
-		_move_to_global_pos(target_node.global_position)
-		break
+	var neglect_distribution := _softmax(raw_neglect_scores)
+	var result_distribution := _softmax(raw_result_scores)
+	
+	var combined_probs := PackedFloat32Array()
+	var total_distribution_sum := 0.0
+	
+	for i in range(objectives.size()):
+		var mixed_score = (neglect_distribution[i] * policy_weight) + (result_distribution[i] * result_weight)
+		combined_probs.append(mixed_score)
+		total_distribution_sum += mixed_score
+		
+	for i in range(combined_probs.size()):
+		combined_probs[i] /= total_distribution_sum
+		objectives[i].sampling_weight = combined_probs[i]
+		
+	var roll := randf()
+	var cumulative_probability := 0.0
+	var selected_objective_dict: Dictionary
+	
+	for o in objectives:
+		cumulative_probability += o.sampling_weight
+		if roll <= cumulative_probability:
+			selected_objective_dict = o
+			break
+			
+	if selected_objective_dict.is_empty():
+		selected_objective_dict = objectives.back()
+		
+	var potential_objective_node = selected_objective_dict.node
+	target_node = potential_objective_node
+	
+	print("Robot targeted: %s | Total Sampling Chance: %.1f%%" % [
+		potential_objective_node.name, 
+		selected_objective_dict.sampling_weight * 100.0
+	])            
+	
+	_emote(potential_objective_node)
+	_move_to_global_pos(target_node.global_position)
 			
 	if not target_node:
 		print("All neglected objectives are currently invalid or unreachable.")
+	
+	state = State.WALKING
+
+
+func _softmax(raw_scores: PackedFloat32Array) -> PackedFloat32Array:
+	var result := PackedFloat32Array()
+	result.resize(raw_scores.size())
+	if raw_scores.is_empty():
+		return result
+		
+	var max_val := -1e9
+	for val in raw_scores:
+		max_val = max(max_val, val)
+		
+	var sum_exp := 0.0
+	for i in range(raw_scores.size()):
+		result[i] = exp(raw_scores[i] - max_val)
+		sum_exp += result[i]
+		
+	for i in range(result.size()):
+		result[i] /= sum_exp
+		
+	return result
 	
 func _emote(node: Node2D):
 	var resource = ECS.get_component(node, ResourceComponent) as ResourceComponent
@@ -139,6 +173,7 @@ func _on_interaction_area_entered(area: Area2D) -> void:
 	if touching == target_node:
 		if _interact():
 			target_node = null
+			state = State.IDLE
 		
 func _on_interaction_area_exited(body: Area2D) -> void:
 	touching = null

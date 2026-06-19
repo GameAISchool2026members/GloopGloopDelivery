@@ -13,7 +13,7 @@ func init(num_objectves : int, player: HumanPlayer) -> void:
 	objectives_count = num_objectves
 	mlp = GodotMLP.new()
 	print("init mlp: ", num_objectves)
-	mlp.build_structure([6, 16, num_objectves], [mlp.Activation.TANH, mlp.Activation.SOFTMAX])
+	mlp.build_structure([6, 16, num_objectves], [mlp.Activation.TANH, mlp.Activation.LINEAR])
 	_reset_history_buffer(player)
 	mlp.print_structure()
 	initialized = true
