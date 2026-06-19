@@ -43,8 +43,7 @@ func _boredness_meter_process(item: Item) -> void:
 		boredness += 1
 	else:
 		boredness -= 1
-	if boredness < 0:
-		boredness = 0
+	boredness = clampi(boredness, 0, 5)
 	robot_player.evil =  boredness >= 5
 			
 	
