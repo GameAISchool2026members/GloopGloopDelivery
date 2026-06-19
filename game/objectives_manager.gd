@@ -98,7 +98,7 @@ func get_id_given_objective(objective : Node2D) -> int:
 		if o == objective:
 			return i
 		i += 1
-	return i
+	return -1
 		
 
 func get_all_resources() -> Array[Node2D]:
