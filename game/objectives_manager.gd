@@ -27,18 +27,17 @@ func get_source_objective_given_item(item: Item) -> Node2D:
 
 func get_target_objective_given_item(item: Item) -> Node2D:
 	print("TODO: fix inventory objecive")
+	var collector : Node2D
 	for o in objectives:
 		if ECS.has_component(o, ProducerComponent):
 			var pc = ECS.get_component(o, ProducerComponent) as ProducerComponent
 			for r : Recipe in pc.recipes:
 				if r.input == item:
 					return o
-		#if ECS.has_component(o, InventoryComponent):
-			#var pc = ECS.get_component(o, InventoryComponent) as InventoryComponent
-			#for r : Recipe in pc.recipes:
-				#if r.input == item:
-					#return o
-	return null
+		if ECS.has_component(o, InventoryComponent):
+			collector = o
+			
+	return collector
 
 func get_id_given_objective(objective : Node2D) -> int:
 	var i : int = 0

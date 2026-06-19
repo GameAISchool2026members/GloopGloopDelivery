@@ -10,6 +10,7 @@ radius = 6.0
 radius = 15.0
 
 [node name="HumanPlayer" type="CharacterBody2D" unique_id=9644110 groups=["player"]]
+collision_layer = 2
 script = ExtResource("1_onrkg")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=570997104]

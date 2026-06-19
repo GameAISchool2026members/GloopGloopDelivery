@@ -4,7 +4,6 @@ func _ready() -> void:
 	interaction_area.area_entered.connect(_on_interaction_area_entered)
 	interaction_area.area_exited.connect(_on_interaction_area_exited)
 	objectives_manager = game_manager.objectives_manager
-	speed = 200
 	
 func _process(delta):
 	# interactions

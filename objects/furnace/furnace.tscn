@@ -14,7 +14,7 @@ script = ExtResource("1_qcspv")
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1527274717]
 texture = ExtResource("1_xhc34")
 
-[node name="Interactable" parent="." unique_id=1305297039 groups=["interactable"] instance=ExtResource("2_bddj4")]
+[node name="Interactable" parent="." unique_id=1305297039 instance=ExtResource("2_bddj4")]
 
 [node name="ProducerComponent" parent="." unique_id=2097329424 instance=ExtResource("4_jugis")]
 recipes = Array[ExtResource("5_5ja5n")]([ExtResource("6_pyh5g"), ExtResource("7_hvdpc")])

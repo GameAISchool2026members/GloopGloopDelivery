@@ -19,15 +19,36 @@ func _ready() -> void:
 		return
 	human_player = game_manager.human_player
 	terrain = game_manager.terrain
+	interaction_area.area_entered.connect(_on_interaction_area_entered)
+	interaction_area.area_exited.connect(_on_interaction_area_exited)
 	objectives_manager = game_manager.objectives_manager
+	
 	policy_predictor.init(objectives_manager.get_number_of_objectives(), human_player)
 	
 	human_player.pickup_objective.connect(_on_player_interacted)
 	
 	
-	await get_tree().process_frame
+func _process(delta):
+	super(delta)
 	
-	find_target()
+	if item != null and state == State.WALKING_TO_ITEM:
+		var target = objectives_manager.get_target_objective_given_item(item)
+		if target == null:
+			return
+		state = State.WALKING_WITH_ITEM
+		_move_to_global_pos(target.global_position)
+	
+	if item == null and state == State.WALKING_WITH_ITEM:
+		state = State.IDLE
+	
+	match state:
+		State.IDLE:
+			find_target()
+		State.WALKING_TO_ITEM:
+			pass
+		State.WALKING_WITH_ITEM:
+			pass
+		
 
 func _physics_process(delta):
 	if path_index >= path.size():
@@ -49,8 +70,7 @@ func _move_to_global_pos(global_target_pos: Vector2):
 	var target_local = terrain.local_to_map(terrain.to_local(global_target_pos))
 	path = terrain.astar.get_point_path(this_local, target_local)
 	path_index = 0
-
-
+	
 func find_target() -> void:
 	print("finding target")
 	var prediction_probs := policy_predictor.predict(human_player)
@@ -74,6 +94,8 @@ func find_target() -> void:
 		
 		if ECS.has_component(potential_objective, InventoryComponent):
 			continue
+		if ECS.has_component(potential_objective, ProducerComponent):
+			continue
 		
 		target_position = potential_objective.global_position
 		target_found = true
@@ -83,14 +105,12 @@ func find_target() -> void:
 			prediction_probs[idx] * 100.0
 		])			
 		_move_to_global_pos(target_position)
+		state = State.WALKING_TO_ITEM
 		break
 			
 	if not target_found:
 		print("All neglected objectives are currently invalid or unreachable.")
-		
-	await get_tree().create_timer(4.0).timeout
 	
-	find_target()
 
 func _is_objective_valid_target(objective: Node2D) -> bool:
 	return true
@@ -107,6 +127,7 @@ func _on_player_interacted(item : Item) -> void:
 func _on_interaction_area_entered(area: Area2D) -> void:
 	print(area.get_groups())
 	touching = area.get_parent()
+	_interact()
 		
 func _on_interaction_area_exited(body: Area2D) -> void:
 	touching = null

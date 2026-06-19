@@ -11,6 +11,7 @@ size = Vector2(8, 8)
 radius = 15.0
 
 [node name="RobotPlayer" type="CharacterBody2D" unique_id=274457977]
+collision_layer = 2
 script = ExtResource("1_pfglk")
 
 [node name="PolicyPredictor" parent="." unique_id=1970150874 instance=ExtResource("2_53jri")]
