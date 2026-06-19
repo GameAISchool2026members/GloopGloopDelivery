@@ -1,6 +1,6 @@
 # Gloop Gloop Delivery 
 
-[Example Image](game_screenshot.png)
+![Example Image](game_screenshot.png)
 
 [Playable link](https://gameaischool2026members.github.io/GloopGloopDelivery/GameJamAI.html)
 
