@@ -1,4 +1,7 @@
 # Gloop Gloop Delivery 
+
+![Example Image](game_screenshot.png)
+
 [Playable link](https://gameaischool2026members.github.io/GloopGloopDelivery/GameJamAI.html)
 
 On mars, aliens collect as much valuable resources as possible.
