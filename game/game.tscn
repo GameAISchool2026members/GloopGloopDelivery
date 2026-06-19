@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://c88igffmy7cfq" path="res://game/game_manager.gd" id="1_vasa2"]
 [ext_resource type="Script" uid="uid://ctek3ueshgrhr" path="res://game/gui.gd" id="2_4fuuu"]
 [ext_resource type="Script" uid="uid://bydlo2gs47d03" path="res://game/objectives_manager.gd" id="2_dxrkv"]
+[ext_resource type="Shader" uid="uid://cttod264npo7d" path="res://game/environment/world_shader.gdshader" id="3_vsp63"]
 [ext_resource type="Script" uid="uid://b15niow2uxp3x" path="res://items/item.gd" id="4_qf6n1"]
 [ext_resource type="PackedScene" uid="uid://dxv44t1na7jg0" path="res://terrain/terrain.tscn" id="5_u5opy"]
 [ext_resource type="Resource" uid="uid://byf1vmw0qh5t2" path="res://items/iron_ore/iron_ore.tres" id="5_vsp63"]
@@ -13,8 +14,22 @@
 [ext_resource type="Resource" uid="uid://dxt8iedfy4cje" path="res://items/gold_bar/gold_bar.tres" id="8_ee6o4"]
 [ext_resource type="Resource" uid="uid://dn7bmat6r683b" path="res://items/iron_bar/iron_bar.tres" id="8_qf6n1"]
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_vsp63"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_b686c"]
+noise = SubResource("FastNoiseLite_vsp63")
+seamless = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b686c"]
+shader = ExtResource("3_vsp63")
+shader_parameter/cloud_texture = SubResource("NoiseTexture2D_b686c")
+shader_parameter/target_resolution = Vector2(160, 90)
+shader_parameter/cloud_color = Color(0, 0, 0, 0.05)
+shader_parameter/dust_color = Color(0.79607844, 0.1882353, 0, 0.14901961)
+
 [sub_resource type="LabelSettings" id="LabelSettings_vasa2"]
 font = ExtResource("1_l1rk1")
+font_size = 36
 shadow_size = 2
 shadow_color = Color(0, 0, 0, 1)
 shadow_offset = Vector2(5, 5)
@@ -32,6 +47,15 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_4fuuu")
+
+[node name="ScreenEffects" type="ColorRect" parent="CanvasLayer/GUI" unique_id=168629776]
+material = SubResource("ShaderMaterial_b686c")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Score" type="Label" parent="CanvasLayer/GUI" unique_id=1806668851]
 layout_mode = 1
