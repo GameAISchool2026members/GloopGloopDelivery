@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://ct3bslot85rhm"]
+
+[ext_resource type="Script" uid="uid://crpmmbtb7ulnp" path="res://recipes/producer_component.gd" id="1_sddtt"]
+
+[node name="ProducerComponent" type="Node" unique_id=2097329424]
+script = ExtResource("1_sddtt")

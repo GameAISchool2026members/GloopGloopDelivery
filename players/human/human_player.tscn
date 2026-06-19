@@ -26,4 +26,8 @@ monitorable = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" unique_id=126223714]
 shape = SubResource("CircleShape2D_a70vh")
 
+[node name="ItemSprite" type="Sprite2D" parent="." unique_id=2011752419]
+position = Vector2(0, -8.56)
+scale = Vector2(0.5, 0.5)
+
 [connection signal="interact" from="." to="." method="_on_interact"]
