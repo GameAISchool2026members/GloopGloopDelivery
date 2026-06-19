@@ -1,11 +1,9 @@
 class_name RobotPlayer extends Player
 
-@export var game_manager : GameManager
 @onready var policy_predictor : PolicyPredictor = $PolicyPredictor
 
 var human_player : HumanPlayer
 var terrain : Terrain
-var objectives_manager : ObjectivesManager
 
 var path_index: int = 0
 var path: PackedVector2Array = []
@@ -25,7 +23,9 @@ func _ready() -> void:
 	policy_predictor.init(objectives_manager.get_number_of_objectives(), human_player)
 	
 	human_player.pickup_objective.connect(_on_player_interacted)
-	_move_to_global_pos(human_player.global_position)
+	
+	
+	await get_tree().process_frame
 	
 	find_target()
 
@@ -65,30 +65,32 @@ func find_target() -> void:
 	
 	var target_position : Vector2
 	var target_found := false
+	var objectives = objectives_manager.get_all_objectives()
 	for idx in sorted_indices:
-		if idx >= policy_predictor.active_objectives.size():
+		if idx >= objectives.size():
 			continue
 			
-		var potential_objective = policy_predictor.active_objectives[idx]
+		var potential_objective = objectives[idx]
 		
-		if  (potential_objective):
-			target_position = potential_objective.global_position
-			target_found = true
-			
-			print("Robot targeted: %s | Probability: %.1f%%" % [
-				potential_objective.name, 
-				prediction_probs[idx] * 100.0
-			])
-			break
-			
-	_move_to_global_pos(target_position)
+		if ECS.has_component(potential_objective, InventoryComponent):
+			continue
+		
+		target_position = potential_objective.global_position
+		target_found = true
+		
+		print("Robot targeted: %s | Probability: %.1f%%" % [
+			potential_objective.name, 
+			prediction_probs[idx] * 100.0
+		])			
+		_move_to_global_pos(target_position)
+		break
 			
 	if not target_found:
 		print("All neglected objectives are currently invalid or unreachable.")
 		
 	await get_tree().create_timer(4.0).timeout
 	
-	#find_target()
+	find_target()
 
 func _is_objective_valid_target(objective: Node2D) -> bool:
 	return true
@@ -102,3 +104,9 @@ func _on_player_interacted(item : Item) -> void:
 	var id = objectives_manager.get_id_given_objective(source)
 	policy_predictor.train(id, human_player)
 	
+func _on_interaction_area_entered(area: Area2D) -> void:
+	print(area.get_groups())
+	touching = area.get_parent()
+		
+func _on_interaction_area_exited(body: Area2D) -> void:
+	touching = null

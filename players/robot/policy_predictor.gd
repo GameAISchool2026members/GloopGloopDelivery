@@ -5,7 +5,6 @@ class_name PolicyPredictor
 @export var history_interval : float = 0.2
 @export var history_horizon : int = 50
 
-var active_objectives: Array[Node2D] = []
 var history_buffer: Array[PackedFloat32Array] = []
 var objectives_count : int = 0
 var initialized := false
@@ -16,7 +15,7 @@ func init(num_objectves : int, player: HumanPlayer) -> void:
 	print("init mlp: ", num_objectves)
 	mlp.build_structure([6, 16, num_objectves], [mlp.Activation.TANH, mlp.Activation.SOFTMAX])
 	_reset_history_buffer(player)
-	#mlp.print_structure()
+	mlp.print_structure()
 	initialized = true
 	_update_history_buffer(player)
 

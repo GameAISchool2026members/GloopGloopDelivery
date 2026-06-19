@@ -15,6 +15,9 @@ var timer : float = 0
 enum State { START, GAME, END }
 var state : State = State.START
 
+func _enter_tree() -> void:
+	terrain.generate()
+	
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	_start_game()
@@ -22,7 +25,8 @@ func _ready() -> void:
 func _start_game() -> void:
 	timer = game_length
 	
-	terrain.generate()
+	
+	
 	objectives_manager.find_all_objectes()
 	human_player.global_position = terrain.map_to_local(terrain.spawns[0])
 	robot_player.global_position = terrain.map_to_local(terrain.spawns[1]) 

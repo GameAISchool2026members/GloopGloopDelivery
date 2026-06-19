@@ -4,11 +4,18 @@ var objectives : Array[Node2D]
 
 
 func find_all_objectes() -> void:
-	objectives.assign(get_tree().get_nodes_in_group("interactable"))
-	print(get_number_of_objectives())
+	objectives.clear()
+	var all = get_tree().get_nodes_in_group("interactable")
+	print("foudn this many:", all.size())
+	for o in all:
+		if not o.is_queued_for_deletion():
+			objectives.append(o)
+			
+	print("final size:", objectives.size())
+	#print(get_number_of_objectives())
 	
-	for o in objectives:
-		print(o)
+	#for o in objectives:
+		#print(o)
 
 func get_source_objective_given_item(item: Item) -> Node2D:
 	for o in objectives:

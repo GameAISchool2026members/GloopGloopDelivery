@@ -1,14 +1,5 @@
 class_name HumanPlayer extends Player
 
-signal interact
-signal pickup_objective(item: Item)
-
-@export var game_manager : GameManager
-@onready var interaction_area: Area2D = $InteractionArea
-
-var objectives_manager : ObjectivesManager
-var touching: Node2D
-
 func _ready() -> void:
 	interaction_area.area_entered.connect(_on_interaction_area_entered)
 	interaction_area.area_exited.connect(_on_interaction_area_exited)
@@ -19,19 +10,8 @@ func _process(delta):
 	# interactions
 	super(delta)
 	if Input.is_action_just_pressed("interact"):
-		#print("interact")
-		if(touching != null):
-			var groups = touching.get_groups()
-			#print("interacting with interactable")
-			if ECS.has_component(touching, ResourceComponent):
-				#print("has it!")
-				item = ECS.get_component(touching, ResourceComponent).item
-				pickup_objective.emit(item)
-			if ECS.has_component(touching, InventoryComponent) and item:
-				var inv = ECS.get_component(touching, InventoryComponent) as InventoryComponent
-				inv.add(item)
-				item = null
-			#pickup_objective.emit(touching)
+		_interact()
+
 			
 
 func get_input():
@@ -44,16 +24,11 @@ func _physics_process(delta):
 	move_and_slide()
 	
 func _on_interaction_area_entered(area: Area2D) -> void:
-	print("touch")
 	print(area.get_groups())
-	print("interacts with other body ")
 	touching = area.get_parent()
-	print("Player touched interactable!")
 		
 func _on_interaction_area_exited(body: Area2D) -> void:
-	print("touch")
 	touching = null
-	print("player stopped touching!")
 	#if body.is_in_group("interactable"):  # or check body is a Player class
 		#touching = null
 		#print("Player stopped touching!")
@@ -74,8 +49,10 @@ func get_default_intent_vector() -> PackedFloat32Array:
 func get_current_intent_vector() -> PackedFloat32Array:
 	var result : PackedFloat32Array = []
 	for o in objectives_manager.get_all_objectives():
-		var dir := global_position.direction_to(o.global_position)
-		result.append(o.global_position.distance_to(global_position))
+		#var o_gpos = o.global_position
+		var o_gpos = global_position
+		var dir := global_position.direction_to(o_gpos)
+		result.append(o_gpos.distance_to(global_position))
 		result.append(dir.dot(velocity))
 		result.append(1.0)
 	return result
