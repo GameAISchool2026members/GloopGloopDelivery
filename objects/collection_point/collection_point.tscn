@@ -1,8 +1,23 @@
 [gd_scene format=3 uid="uid://dtdnjx0jaxob2"]
 
 [ext_resource type="Texture2D" uid="uid://cjacu0wu1krr1" path="res://objects/collection_point/crate.png" id="1_ts63f"]
+[ext_resource type="Script" uid="uid://dceaif7hmrldd" path="res://items/inventory_component.gd" id="2_23tqt"]
+[ext_resource type="PackedScene" uid="uid://rnw6vjamikjk" path="res://players/human/interactable.tscn" id="3_tf3wj"]
 
-[node name="CollectionPoint" type="Node2D" unique_id=521397584]
+[node name="CollectionPoint" type="Node2D" unique_id=521397584 groups=["interactable"]]
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1527274717]
 texture = ExtResource("1_ts63f")
+
+[node name="InventoryComponent" type="Node" parent="." unique_id=198810811 node_paths=PackedStringArray("label")]
+script = ExtResource("2_23tqt")
+label = NodePath("../RichTextLabel")
+metadata/_custom_type_script = "uid://dceaif7hmrldd"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=1971245071]
+offset_left = -19.0
+offset_top = -33.0
+offset_right = 95.0
+offset_bottom = -8.0
+
+[node name="Interactable" parent="." unique_id=1305297039 instance=ExtResource("3_tf3wj")]
