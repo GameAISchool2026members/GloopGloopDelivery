@@ -12,4 +12,6 @@ func _process(delta):
 	# Display current item
 	if item:
 		item_sprite.texture = item.texture
+	else:
+		item_sprite.texture = null
 	
