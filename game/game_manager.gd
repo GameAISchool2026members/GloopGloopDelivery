@@ -2,7 +2,7 @@ class_name GameManager extends Node2D
 
 @onready var gui : GameGUI = $"../CanvasLayer/GUI"
 
-@export var game_length :float = 100
+@export var game_length :float = 150
 @export var score_table: Dictionary[Item, float]
 @export var human_player : Player
 @export var robot_player : Player
@@ -38,7 +38,7 @@ func _boredness_meter_process(item: Item) -> void:
 		if counts[prev_item] > highest:
 			highest = counts[prev_item]
 			most_common = prev_item
-	if highest >= 3:
+	if highest >= 3 and most_common == item:
 		print("robot is bored")
 		(robot_player as RobotPlayer).bored_particles()
 		boredness += 1
