@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://4fdnn02qdr2q" path="res://items/resource_component.gd" id="3_i6727"]
 [ext_resource type="Resource" uid="uid://ow48chmijww0" path="res://items/gold_ore/gold_ore.tres" id="4_qsyli"]
 
-[node name="GoldOre" type="Node2D" unique_id=521397584]
+[node name="GoldOre" type="Node2D" unique_id=521397584 groups=["interactable"]]
 
 [node name="Interactable" parent="." unique_id=1305297039 groups=["gold"] instance=ExtResource("1_f3x5x")]
 

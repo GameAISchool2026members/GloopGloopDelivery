@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://rnw6vjamikjk" path="res://players/human/interactable.tscn" id="1_qlpun"]
 [ext_resource type="Texture2D" uid="uid://bvof3vo0lghp6" path="res://objects/iron_ore/iron_ore.png" id="2_uia63"]
 
-[node name="IronOre" type="Node2D" unique_id=521397584]
+[node name="IronOre" type="Node2D" unique_id=521397584 groups=["interactable"]]
 
 [node name="Interactable" parent="." unique_id=1305297039 groups=["iron"] instance=ExtResource("1_qlpun")]
 
