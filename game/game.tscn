@@ -15,7 +15,6 @@
 
 [sub_resource type="LabelSettings" id="LabelSettings_vasa2"]
 font = ExtResource("1_l1rk1")
-font_size = 36
 shadow_size = 2
 shadow_color = Color(0, 0, 0, 1)
 shadow_offset = Vector2(5, 5)
@@ -115,6 +114,4 @@ obstacle_percentage = 0.05
 game_manager = NodePath("../../GameManager")
 
 [node name="RobotPlayer" parent="Players" unique_id=274457977 node_paths=PackedStringArray("game_manager") instance=ExtResource("6_u5opy")]
-policy_weight = null
-result_weight = null
 game_manager = NodePath("../../GameManager")
