@@ -122,7 +122,6 @@ texture = ExtResource("4_b686c")
 
 [node name="GameManager" type="Node2D" parent="." unique_id=385739205 node_paths=PackedStringArray("human_player", "robot_player", "terrain", "objectives_manager")]
 script = ExtResource("1_vasa2")
-game_length = null
 score_table = Dictionary[ExtResource("4_qf6n1"), float]({
 ExtResource("5_vsp63"): 1.0,
 ExtResource("6_b686c"): 2.0,
@@ -157,4 +156,5 @@ obstacle_percentage = 0.05
 game_manager = NodePath("../../GameManager")
 
 [node name="RobotPlayer" parent="Players" unique_id=274457977 node_paths=PackedStringArray("game_manager") instance=ExtResource("6_u5opy")]
+result_weight = 0.2
 game_manager = NodePath("../../GameManager")

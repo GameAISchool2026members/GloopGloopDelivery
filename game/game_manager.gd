@@ -31,17 +31,24 @@ func _boredness_meter_process(item: Item) -> void:
 	var most_common = null
 	var highest = 0
 	print("processing boredness")
-	print(robot_history)
+	print(robot_history.map(func (item: Item): return item.name))
 	for prev_item in robot_history:
 		counts[prev_item] = counts.get(prev_item, 0) + 1
-		print(counts)
 		if counts[prev_item] > highest:
 			highest = counts[prev_item]
 			most_common = prev_item
-	if highest > 2:
+	if highest >= 3:
 		print("robot is bored")
 		(robot_player as RobotPlayer).bored_particles()
-		boredness +=1
+		boredness += 1
+	else:
+		boredness -= 1
+	if boredness < 0:
+		boredness = 0
+	robot_player.evil =  boredness >= 5
+			
+	
+	print("current boredness level %d" % boredness)
 func _enter_tree() -> void:
 	terrain.generate()
 	if objectives_manager:

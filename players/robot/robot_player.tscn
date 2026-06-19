@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://8ff46jns7ll2" path="res://players/robot/robot_player.gd" id="1_pfglk"]
 [ext_resource type="PackedScene" uid="uid://dt2lp7yqcv0wo" path="res://players/robot/policy_predictor.tscn" id="2_53jri"]
 [ext_resource type="Texture2D" uid="uid://bpvjos7c7iwtw" path="res://players/robot/robot.png" id="3_gcp5k"]
+[ext_resource type="Texture2D" uid="uid://y5ivsg7cb54u" path="res://players/robot/evil_robot.png" id="4_nvhv3"]
 [ext_resource type="Texture2D" uid="uid://d22mwy3mcvvf6" path="res://items/gold_ore/gold_ore.png" id="4_xxa81"]
 [ext_resource type="Texture2D" uid="uid://f8hd465vb1kv" path="res://players/robot/frown.png" id="5_y050i"]
 
@@ -12,6 +13,14 @@ region = Rect2(0, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y050i"]
 atlas = ExtResource("3_gcp5k")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gi3m0"]
+atlas = ExtResource("4_nvhv3")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xn350"]
+atlas = ExtResource("4_nvhv3")
 region = Rect2(16, 0, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_nvhv3"]
@@ -25,6 +34,17 @@ animations = [{
 }],
 "loop": true,
 "name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gi3m0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xn350")
+}],
+"loop": true,
+"name": &"evil",
 "speed": 5.0
 }]
 
@@ -43,8 +63,8 @@ speed = 100
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=1942225351]
 sprite_frames = SubResource("SpriteFrames_nvhv3")
+animation = &"evil"
 autoplay = "default"
-frame_progress = 0.6647651
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=79676028]
 shape = SubResource("RectangleShape2D_p7nr7")

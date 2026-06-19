@@ -7,13 +7,14 @@ var terrain : Terrain
 
 var path_index: int = 0
 var path: PackedVector2Array = []
-
+@onready var animated_sprite = $Sprite2D
 enum State { IDLE, WALKING, WAITING }
 var state : State = State.IDLE
 var target_node : Node2D
 
 var history_items: Array = []
-var max_history_size: int = 10
+var max_history_size: int = 8
+var evil: bool = false
 
 func _ready() -> void:
 	if game_manager == null:
@@ -32,6 +33,12 @@ func _ready() -> void:
 	
 func _process(delta):
 	super(delta)
+	
+	if evil:
+		animated_sprite.play("evil")
+	else:
+		animated_sprite.play("default")
+		
 	
 	match state:
 		State.IDLE:
