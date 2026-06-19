@@ -34,4 +34,12 @@ func _interact():
 			var inv = ECS.get_component(touching, InventoryComponent) as InventoryComponent
 			inv.add(item)
 			item = null
+		if ECS.has_component(touching, ProducerComponent) and item:
+			var furnace = ECS.get_component(touching, ProducerComponent) as ProducerComponent
+			var delivered = furnace.produce_item(item)
+			if delivered:	
+					item = null
+		if ECS.has_component(touching, ProducerComponent) and not item:
+			var furnace = ECS.get_component(touching, ProducerComponent) as ProducerComponent
+			item = furnace.pickup()
 		#pickup_objective.emit(touching)

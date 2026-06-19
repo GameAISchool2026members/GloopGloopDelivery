@@ -2,6 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://rnw6vjamikjk" path="res://players/human/interactable.tscn" id="1_qlpun"]
 [ext_resource type="Texture2D" uid="uid://bvof3vo0lghp6" path="res://objects/iron_ore/iron_ore.png" id="2_uia63"]
+[ext_resource type="Script" uid="uid://4fdnn02qdr2q" path="res://items/resource_component.gd" id="3_ntw6h"]
+[ext_resource type="Resource" uid="uid://byf1vmw0qh5t2" path="res://items/iron_ore/iron_ore.tres" id="4_qh0pd"]
 
 [node name="IronOre" type="Node2D" unique_id=521397584 groups=["interactable"]]
 
@@ -9,3 +11,8 @@
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1527274717]
 texture = ExtResource("2_uia63")
+
+[node name="ResourceComponent" type="Node" parent="." unique_id=439110663]
+script = ExtResource("3_ntw6h")
+item = ExtResource("4_qh0pd")
+metadata/_custom_type_script = "uid://4fdnn02qdr2q"

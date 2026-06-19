@@ -1,8 +1,21 @@
 [gd_scene format=3 uid="uid://ccyvh84kwayqn"]
 
+[ext_resource type="Script" uid="uid://cl4tquw8uqi58" path="res://objects/furnace/furnace.gd" id="1_qcspv"]
 [ext_resource type="Texture2D" uid="uid://cw8jtvsvgksla" path="res://objects/furnace/furnace_off.png" id="1_xhc34"]
+[ext_resource type="PackedScene" uid="uid://rnw6vjamikjk" path="res://players/human/interactable.tscn" id="2_bddj4"]
+[ext_resource type="PackedScene" uid="uid://ct3bslot85rhm" path="res://recipes/producer_component.tscn" id="4_jugis"]
+[ext_resource type="Script" uid="uid://b7fmof07uo73v" path="res://recipes/recipe.gd" id="5_5ja5n"]
+[ext_resource type="Resource" uid="uid://dh3ye5y7fa0n0" path="res://recipes/smelt_gold.tres" id="6_pyh5g"]
+[ext_resource type="Resource" uid="uid://b8hbq5hu6b13o" path="res://recipes/smelt_iron.tres" id="7_hvdpc"]
 
 [node name="Furnace" type="Node2D" unique_id=521397584]
+script = ExtResource("1_qcspv")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1527274717]
 texture = ExtResource("1_xhc34")
+
+[node name="Interactable" parent="." unique_id=1305297039 groups=["interactable"] instance=ExtResource("2_bddj4")]
+
+[node name="ProducerComponent" parent="." unique_id=2097329424 instance=ExtResource("4_jugis")]
+recipes = Array[ExtResource("5_5ja5n")]([ExtResource("6_pyh5g"), ExtResource("7_hvdpc")])
+delay = 3
