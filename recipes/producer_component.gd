@@ -25,8 +25,10 @@ func pickup() -> Item:
 	if is_output_empty():
 		print("wanted to pickup item but component is empty")
 		return null
+	
+	var item = processed_items.pop_front()
 	_display()
-	return processed_items.pop_front()
+	return item
 
 func process_item() -> void:
 	if is_input_empty():
